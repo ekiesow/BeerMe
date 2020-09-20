@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-beerme-dev-132907-authRole",
+      "UnauthRoleArn": "arn:aws:iam::226708847740:role/amplify-beerme-dev-132907-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::226708847740:role/amplify-beerme-dev-132907-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-beerme-dev-132907-deployment",
+      "UnauthRoleName": "amplify-beerme-dev-132907-unauthRole",
+      "StackName": "amplify-beerme-dev-132907",
+      "StackId": "arn:aws:cloudformation:us-west-2:226708847740:stack/amplify-beerme-dev-132907/711ff4c0-f924-11ea-bd2d-0239b11280c5",
+      "AmplifyAppId": "d1g5t9fsaml27m"
+    }
+  }
+}
