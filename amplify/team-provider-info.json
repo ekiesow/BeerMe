@@ -10,6 +10,11 @@
       "StackName": "amplify-beerme-dev-132907",
       "StackId": "arn:aws:cloudformation:us-west-2:226708847740:stack/amplify-beerme-dev-132907/711ff4c0-f924-11ea-bd2d-0239b11280c5",
       "AmplifyAppId": "d1g5t9fsaml27m"
+    },
+    "categories": {
+      "auth": {
+        "beermea09a67d7": {}
+      }
     }
   }
 }
