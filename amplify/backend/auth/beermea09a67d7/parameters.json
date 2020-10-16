@@ -1,6 +1,6 @@
 {
     "identityPoolName": "beermea09a67d7_identitypool_a09a67d7",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "beermea09a67d7",
     "userPoolName": "beermea09a67d7_userpool_a09a67d7",
     "autoVerifiedAttributes": [

@@ -1,0 +1,56 @@
+type Drink @model @key(name: "byDrink", fields: ["id"]){
+  id: ID!
+  drinkName: String!
+  drinkStyle: String
+  abv: String
+  breweryName: String!
+  breweryLocation: String
+  description: String
+  image: Image
+}
+
+type Cusomer @model {
+  id: ID!
+  userId: String!
+  username: String!
+  email: String!
+  firstName: String
+  lastName: String
+  phoneNumber: String
+  address: String
+  shippingAddress: String
+  ordersByDate: [Order] @connection(keyName: "byCustomerByDate", fields: ["id"])
+}
+
+type Order @model 
+  @key(name: "byCustomerByDate", fields: ["id", "createdAt"])
+  @key(fields: ["customerId", "createdAt"])
+{
+  id: ID!
+  customerId: ID!
+  customerEmail: String!
+  createdAt: String!
+  drinks: [Drink] @connection(keyName: "byDrink", fields["id"])
+  amount: Int!
+  status: Status!
+}
+
+enum Status {
+  DELIVERED
+  SHIPPED
+  PENDING
+  UNKNOWN
+}
+
+type S3Object {
+  bucket: String!
+  region: String!
+  key: String!
+}
+
+type Image @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  # owner: String
+  file: S3Object
+}
