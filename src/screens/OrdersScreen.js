@@ -11,7 +11,7 @@ const OrdersScreen = () => {
       <Text>Orders!</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   center: {

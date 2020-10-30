@@ -12,7 +12,7 @@ const HomeScreen = () => {
       <Text>Home!</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   center: {

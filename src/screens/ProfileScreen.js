@@ -11,7 +11,7 @@ const ProfileScreen = () => {
       <Text>Profile!</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   center: {

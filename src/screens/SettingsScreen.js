@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   View,
@@ -12,7 +11,7 @@ const SettingsScreen = () => {
       <Text>Settings!</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   center: {
