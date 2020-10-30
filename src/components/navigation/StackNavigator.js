@@ -43,4 +43,12 @@ const ProfileStackNavigator = () => {
   );
 };
 
-export { HomeStackNavigator, OrdersStackNavigator, ProfileStackNavigator };
+const SettingsStackNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={screenOptionStyle}>
+      <Stack.Screen name="Settings" component={Settings} />
+    </Stack.Navigator>
+  );
+};
+
+export { HomeStackNavigator, OrdersStackNavigator, ProfileStackNavigator, SettingsStackNavigator };
