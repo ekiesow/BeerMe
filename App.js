@@ -13,59 +13,19 @@ import {
   ScrollView,
   StatusBar,
 } from 'react-native';
-
 import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import HomeScreen from './src/screens/HomeScreen';
-import OrdersScreen from './src/screens/OrdersScreen';
-import ProfileScreen from './src/screens/ProfileScreen';
 
-const Tab = createMaterialBottomTabNavigator();
-const Drawer = createDrawerNavigator();
+import DrawerNavigator from "./src/components/navigation/DrawerNavigator"
 
 const App: () => React$Node = () => {
   return (
     <>
     <NavigationContainer>
       <StatusBar barStyle="dark-content" />
-        <Tab.Navigator
-          initialRouteName="Home"
-        >
-          <Tab.Screen 
-            name="Home" component={HomeScreen} 
-            options={{
-              tabBarLabel: "Home",
-              tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="home" color={color} size={26} />
-              ),
-              }}
-          />
-          <Tab.Screen
-            name="Orders"
-            component={OrdersScreen}
-            options={{
-              tabBarLabel: "Orders",
-              tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="package-variant-closed" color={color} size={26} />
-              ),
-              }}
-          />
-          <Tab.Screen
-            name="Profile"
-            component={ProfileScreen}
-            options={{
-              tabBarLabel: "Profile",
-              tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="account-circle" color={color} size={26} />
-              ),
-              }}
-          />
-        </Tab.Navigator>
+      <DrawerNavigator />
     </NavigationContainer>
     </>
   );
