@@ -1,19 +1,19 @@
-import React from "react";
-import { createStackNavigator } from '@react-navigation/stack';
+import React from 'react';
+import {createStackNavigator} from '@react-navigation/stack';
 
-import Home from "../../screens/HomeScreen";
-import Orders from "../../screens/OrdersScreen";
-import Settings from "../../screens/SettingsScreen";
-import Profile from "../../screens/ProfileScreen";
+import Home from '../../screens/HomeScreen';
+import Orders from '../../screens/OrdersScreen';
+import Settings from '../../screens/SettingsScreen';
+import Profile from '../../screens/ProfileScreen';
 
 const Stack = createStackNavigator();
 
 const screenOptionStyle = {
   headerStyle: {
-    backgroundColor: "#9AC4F8",
+    backgroundColor: '#9AC4F8',
   },
-  headerTintColor: "white",
-  headerBackTitle: "Back",
+  headerTintColor: 'white',
+  headerBackTitle: 'Back',
 };
 
 const HomeStackNavigator = () => {
@@ -51,4 +51,9 @@ const SettingsStackNavigator = () => {
   );
 };
 
-export { HomeStackNavigator, OrdersStackNavigator, ProfileStackNavigator, SettingsStackNavigator };
+export {
+  HomeStackNavigator,
+  OrdersStackNavigator,
+  ProfileStackNavigator,
+  SettingsStackNavigator,
+};
