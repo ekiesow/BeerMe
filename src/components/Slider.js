@@ -1,14 +1,54 @@
-import React, {useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {View, ScrollView, Dimensions, Text, StyleSheet} from 'react-native';
+import {FlatList} from 'react-native-gesture-handler';
 import MyCard from './MyCard';
 
-const {width} = Dimensions.get('window');
-const height = width; // 60%
+const {width, height} = Dimensions.get('window');
+
+const Pagination = (props, {index}) => {
+  return (
+    <View style={styles.pagination} pointerEvents="none">
+      {props.data.map((_, i) => {
+        return (
+          <View
+            key={i}
+            style={[
+              styles.paginationDot,
+              index === i
+                ? styles.paginationDotActive
+                : styles.paginationDotInactive,
+            ]}
+          />
+        );
+      })}
+    </View>
+  );
+};
 
 const Slider = (props) => {
-  const [active, isActive] = useState(0);
+  //   const [index, setIndex] = useState(0);
+  //   const indexRef = useRef(index);
+  //   indexRef.current = index;
 
-  change = ({nativeEvent}) => {
+  //   const onScroll = useCallback((event) => {
+  //     const cardSize = event.nativeEvent.layoutMeasurement.width;
+  //     const index = event.nativeEvent.contentOffset.x / cardSize;
+  //     const roundIndex = Math.round(index);
+
+  //     const distance = Math.abs(roundIndex - index);
+
+  //     // Prevent one pixel triggering setIndex in the middle
+  //     // of the transition. With this we have to scroll a bit
+  //     // more to trigger the index change.
+  //     const isNoMansLand = 0.4 < distance;
+
+  //     if (roundIndex !== indexRef.current && !isNoMansLand) {
+  //       setIndex(roundIndex);
+  //     }
+  //   }, []);
+
+  const [active, isActive] = useState(0);
+  const onScroll = ({nativeEvent}) => {
     const slide = Math.ceil(
       nativeEvent.contentOffset.x / nativeEvent.layoutMeasurement.width,
     );
@@ -17,67 +57,64 @@ const Slider = (props) => {
     }
   };
 
+  const flatListOptimizationProps = {
+    initialNumToRender: 0,
+    maxToRenderPerBatch: 1,
+    removeClippedSubviews: true,
+    scrollEventThrottle: 16,
+    windowSize: 2,
+    keyExtractor: useCallback((s) => String(s.id), []),
+    getItemLayout: useCallback(
+      (_, index) => ({
+        index,
+        length: width,
+        offset: index * width,
+      }),
+      [],
+    ),
+  };
+
+  const renderItem = useCallback(function renderItem({item}) {
+    return <MyCard data={item} />;
+  }, []);
+
   return (
-    <View style={style.container}>
-      <ScrollView
+    <>
+      <FlatList
+        data={props.data}
+        style={styles.carousel}
+        renderItem={renderItem}
         pagingEnabled
         horizontal
-        onScroll={change}
         showsHorizontalScrollIndicator={false}
-        style={style.scroll}>
-        {props.cards.map((card, index) => (
-          <MyCard
-            key={index}
-            title={card.title}
-            content={card.content}
-            style={card.style}
-          />
-        ))}
-      </ScrollView>
-      <View style={style.pagination}>
-        {props.cards.map((i, k) => (
-          <Text
-            key={k}
-            style={k == active ? style.pagingActiveText : style.pagingText}>
-            ⬤
-          </Text>
-        ))}
-      </View>
-    </View>
+        onScroll={onScroll}
+        {...flatListOptimizationProps}
+      />
+      <Pagination data={props.data} index={active} />
+    </>
   );
 };
 
-const style = StyleSheet.create({
-  container: {
-    marginTop: 50,
-    width,
-    height,
-  },
-  scroll: {
-    width,
-    height,
-  },
-  card: {
-    width,
-    height,
-    // resizeMode: 'cover',
-  },
+const styles = StyleSheet.create({
+  slideImage: {width: width * 0.9, height: height * 0.7},
+  slideTitle: {fontSize: 24},
+  slideSubtitle: {fontSize: 18},
   pagination: {
-    flexDirection: 'row',
     position: 'absolute',
-    bottom: 0,
-    alignSelf: 'center',
+    bottom: 8,
+    width: '100%',
+    justifyContent: 'center',
+    flexDirection: 'row',
   },
-  pagingText: {
-    fontSize: width / 30,
-    color: '#666',
-    margin: 3,
+  paginationDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginHorizontal: 2,
   },
-  pagingActiveText: {
-    fontSize: width / 30,
-    color: 'black',
-    margin: 3,
-  },
+  paginationDotActive: {backgroundColor: 'lightblue'},
+  paginationDotInactive: {backgroundColor: 'gray'},
+  carousel: {flex: 1},
 });
 
 export default Slider;

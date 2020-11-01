@@ -6,26 +6,33 @@ import Slider from '../components/Slider';
 
 const cards = [
   {
-    title: 'Hello',
-    content: 'World',
+    drinkName: 'Double Dry Hopped Green City',
+    breweryName: 'Other Half Brewing Co.',
+    content: "Try this beer! It's great!",
   },
-  // {
-  //   title: 'Hello',
-  //   content: 'Moto',
-  // },
-  // {
-  //   title: 'Hello',
-  //   content: 'Mando',
-  // },
+  {
+    drinkName: 'Double Scatterbrain DDH W/ Citra',
+    breweryName: 'Bearded Iris Brewing',
+    content: "Try this beer! It's even better!",
+  },
+  {
+    drinkName: 'Prickle My Fancy Slushy',
+    breweryName: '903 Brewers',
+    content: "Try this beer! It's great!",
+  },
 ];
 
 const HomeScreen = () => {
   return (
     <>
       <View style={styles.center}>
-        <Text>Home!</Text>
+        {/* <MyCard
+          drinkName="Double Dry Hopped Green City"
+          breweryName="Other Half Brewing Co."
+          content="Try this beer! It's great!"
+        /> */}
+        <Slider data={cards} />
       </View>
-      <Slider cards={cards} />
     </>
   );
 };
@@ -33,9 +40,7 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   center: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
+    // justifyContent: 'center',
   },
 });
 
