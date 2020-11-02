@@ -1,6 +1,12 @@
-type Drink @model 
-@key(name: "byDrink", fields: ["drinkId"]) # name specifies the name of a secondary index
-{
+type Drink
+  @model
+  @auth(
+    rules: [
+      {allow: public, operations: [read]} # must have API key configured in aws-exports.js
+      {allow: groups, groups: ["Admin"]} # Admin users can access any operation
+    ]
+  )
+  @key(name: "byDrink", fields: ["drinkId"]) { # name specifies the name of a secondary index
   drinkId: ID!
   drinkName: String!
   drinkStyle: String
@@ -18,30 +24,41 @@ type S3Object {
   key: String!
 }
 
-type Image @model 
-@auth(rules: [{allow: public}]) # TODO check/modify this
-{
+type Image
+  @model
+  @auth(
+    rules: [
+      {allow: public, operations: [read]} # must have API key configured in aws-exports.js
+      {allow: groups, groups: ["Admin"]} # Admin users can access any operation
+    ]
+  ) {
   id: ID!
   name: String
-  # owner: String
+  owner: String
   file: S3Object
 }
 
-type Cusomer @model {
+type Customer
+  @model
+  @auth(rules: [{allow: owner, operations: [create, read, update]}]) {
   userId: String!
   username: String!
   email: String!
-  firstName: String
-  lastName: String
+  firstName: String!
+  lastName: String!
   phoneNumber: String
   address: Address
-  shippingAddress: Address
-  ordersByDate: [Order] @connection(keyName: "byCustomerByDate", fields: ["userId"]) # one-to-many connection: Customer "has many" orders
+  shippingAddress: Address!
+  ordersByDate: [Order]
+    @connection(keyName: "byUserIdByDate", fields: ["userId"]) # one-to-many connection: Customer "has many" orders
+  ordersByStatusByDate: [Order]
+    @connection(keyName: "byUserIdByStatusByDate", fields: ["userId"]) # one-to-many connection: Customer "has many" orders
 }
 
-type Address @model
-  @key(fields: ["addressId", "userId"]) # HASH key: addressId, SORT key: userId
-{
+type Address
+  @model
+  @auth(rules: [{allow: owner}])
+  @key(fields: ["addressId", "userId"]) { # HASH key: addressId, SORT key: userId
   addressId: ID!
   userId: String!
   firstName: String!
@@ -53,22 +70,6 @@ type Address @model
   postalCode: String!
 }
 
-type Order @model 
-  @key(fields: ["orderId", "userId", "createdAt"]) # HASH key: orderId, composite SORT key: userId#createdAt
-  @key(name: "byCustomerByDate", fields: ["userId", "createdAt"]) # @key allows Orders to be queried by userId
-  @key(name: "byCustomerIdByStatus", fields: ["userId", "status"], queryField: "ordersByCustomerIdByStatus") # query orders by status and createdAt
-{
-  orderId: ID!
-  userId: String!
-  customerEmail: String!
-  createdAt: AWSDateTime!
-  drinks: [Drink] @connection(keyName: "byDrink", fields["orderId"])
-  amount: Int!
-  status: OrderStatus!
-  customer: Customer @connnection(fields: ["userId"]) # Add many-to-one connection to type that has one-to-many. Each Order "belongs to" a Customer.
-  shippingAddress: Address!
-}
-
 enum OrderStatus {
   DELIVERED
   SHIPPED
@@ -78,31 +79,59 @@ enum OrderStatus {
   UNKNOWN
 }
 
-type Cart @model
-@auth(rules: [{allow: owner, operations: [update, delete]}]) # TODO check/modify this
-{
-  id: ID!
-  userId: String!
+type Order
+  @model
+  @auth(rules: [{allow: owner}])
+  @key(name: "byUserIdByDate", fields: ["userId", "createdAt"]) # @key allows Orders to be queried by userId
+  @key(
+    name: "byUserIdByStatusByDate"
+    fields: ["userId", "status", "createdAt"]
+    queryField: "ordersByCustomerIdByStatus"
+  ) { # query orders by status and createdAt
   orderId: ID!
-  drinks: [Drink] @connection()
+  userId: String!
+  customerEmail: String!
+  createdAt: AWSDateTime!
+  drinks: [Drink] @connection(keyName: "byDrink", fields: ["orderId"])
+  amount: Int!
+  status: OrderStatus!
+  customer: Customer @connnection(fields: ["userId"]) # Add many-to-one connection to type that has one-to-many. Each Order "belongs to" a Customer.
+  shippingAddress: Address!
+  orderItems: [OrderItem] @connection(keyName: "byOrder", fields: ["orderId"]) # Cart has many CartItems
 }
 
-type CartItem @model
-@auth(rules: [{allow: owner, operations: [update, delete]}]) # TODO check/modify this
-@key(field: ["cartItemId", "userId"]) # HASH key: cartItemId, SORT key: userId
-{
+type OrderItem
+  @model
+  @auth(rules: [{allow: owner}])
+  @key(name: "byOrder", fields: ["orderId", "orderItemId"])
+  @key(name: "byOrderId", fields: ["userId"], queryField: "orderItemByUserId")
+  @key(fields: ["orderItemId", "userId"]) { # HASH key: orderItemId, SORT key: orderId
+  orderItemId: ID!
+  orderId: ID!
+  drinkId: ID!
+  userId: String!
+  quantity: Int!
+  order: Order @connection(fields: ["orderId"]) # OrderItem belongs to Order
+}
+
+type Cart @model @auth(rules: [{allow: owner}]) {
+  cartId: ID!
+  userId: String!
+  orderId: ID!
+  cartItems: [CartItem] @connection(keyName: "byCart", fields: ["cartId"]) # Cart has many CartItems
+}
+
+type CartItem
+  @model
+  @auth(rules: [{allow: owner}])
+  @key(name: "byCart", fields: ["cartId", "cartItemId"])
+  @key(name: "byUserId", fields: ["userId"], queryField: "cartItemByUserId")
+  @key(fields: ["cartItemId", "userId"]) { # HASH key: cartItemId, SORT key: userId
   cartItemId: ID!
+  cartId: ID!
   userId: String!
   drinkId: ID!
   quantity: Int!
   createdAt: AWSDateTime!
-}
-
-# OrderItem type? hold quantity?
-type OrderItem @model {
-  orderItemId: ID!
-  orderId: ID!
-  drinkId: ID!
-  # userId: String!
-  quantity: Int!
+  cart: Cart @connection(fields: ["cartId"]) # CartItem belongs to Cart
 }
