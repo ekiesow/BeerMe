@@ -95,7 +95,7 @@ type Order
   drinks: [Drink] @connection(keyName: "byDrink", fields: ["orderId"])
   amount: Int!
   status: OrderStatus!
-  customer: Customer @connnection(fields: ["userId"]) # Add many-to-one connection to type that has one-to-many. Each Order "belongs to" a Customer.
+  customer: Customer @connection(fields: ["userId"]) # Add many-to-one connection to type that has one-to-many. Each Order "belongs to" a Customer.
   shippingAddress: Address!
   orderItems: [OrderItem] @connection(keyName: "byOrder", fields: ["orderId"]) # Cart has many CartItems
 }
