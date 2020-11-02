@@ -34,7 +34,7 @@ type Image
   ) {
   id: ID!
   name: String
-  owner: String
+  # owner: String
   file: S3Object
 }
 
@@ -48,7 +48,7 @@ type Customer
   lastName: String!
   phoneNumber: String
   address: Address
-  shippingAddress: Address!
+  shippingAddress: Address
   ordersByDate: [Order]
     @connection(keyName: "byUserIdByDate", fields: ["userId"]) # one-to-many connection: Customer "has many" orders
   ordersByStatusByDate: [Order]
