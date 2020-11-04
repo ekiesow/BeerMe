@@ -5,9 +5,8 @@ type Drink
       {allow: public, operations: [read]} # must have API key configured in aws-exports.js
       {allow: groups, groups: ["Admin"]} # Admin users can access any operation
     ]
-  )
-  @key(name: "byDrink", fields: ["drinkId"]) { # name specifies the name of a secondary index
-  drinkId: ID!
+  ) {
+  id: ID!
   drinkName: String!
   drinkStyle: String
   abv: String
@@ -50,9 +49,9 @@ type Customer
   phoneNumber: String
   address: Address
   shippingAddress: Address
-  ordersByDate: [Order] @connection(keyName: "byUserIdByDate", fields: ["id"]) # one-to-many connection: Customer "has many" orders
+  ordersByDate: [Order] @connection(keyName: "byCustomerByDate", fields: ["id"]) # one-to-many connection: Customer "has many" orders
   ordersByStatusByDate: [Order]
-    @connection(keyName: "byUserIdByStatusByDate", fields: ["id"]) # one-to-many connection: Customer "has many" orders
+    @connection(keyName: "byCustomerByStatusByDate", fields: ["id"]) # one-to-many connection: Customer "has many" orders
 }
 
 type Address @model @auth(rules: [{allow: owner}]) {
@@ -80,44 +79,37 @@ enum OrderStatus {
 type Order
   @model
   @auth(rules: [{allow: owner}])
+  @key(name: "byCustomerByDate", fields: ["customerId", "createdAt"]) # @key allows Orders to be queried by userId and createdAt
   @key(
-    name: "byUserIdByDate"
-    fields: ["userId", "createdAt"]
-    queryField: "orderByUserIdByDate"
-  ) # @key allows Orders to be queried by userId and createdAt
-  @key(
-    name: "byUserIdByStatusByDate"
-    fields: ["userId", "status", "createdAt"]
-    queryField: "ordersByUserIdByStatusByDate"
-  ) # query orders by userId and status and createdAt
-  @key(fields: ["id", "userId"]) {
+    name: "byCustomerByStatusByDate"
+    fields: ["customerId", "status", "createdAt"]
+  ) { # query orders by userId and status and createdAt
   id: ID!
+  customerId: ID!
   userId: String!
   customerEmail: String!
   createdAt: AWSDateTime!
-  drinks: [Drink] @connection(keyName: "byDrink", fields: ["id"])
   amount: Int!
   status: OrderStatus!
-  customer: Customer @connection(fields: ["userId"]) # Add many-to-one connection to type that has one-to-many. Each Order "belongs to" a Customer.
+  customer: Customer @connection(fields: ["customerId"]) # Add many-to-one connection to type that has one-to-many. Each Order "belongs to" a Customer.
   shippingAddress: Address!
-  orderItems: [OrderItem] @connection(keyName: "byOrder", fields: ["id"]) # Order has many CartItems
+  orderItems: [OrderItem]
+    @connection(keyName: "orderItemByOrder", fields: ["id"]) # Order has many CartItems
 }
 
 type OrderItem
   @model
   @auth(rules: [{allow: owner}])
   @key(
-    name: "byOrder"
-    fields: ["orderId", "drinkId"]
-    queryField: "orderItemByOrderIdByDrinkId"
-  )
-  @key(name: "byOrderId", fields: ["userId"], queryField: "orderItemByUserId")
-  @key(fields: ["id", "userId"]) { # HASH key: id, SORT key: orderId
+    name: "orderItemByOrder"
+    fields: ["orderId"]
+    queryField: "orderItemByOrderId"
+  ) {
   id: ID!
   orderId: ID!
   drinkId: ID!
   drink: Drink @connection(fields: ["drinkId"])
   userId: String!
   quantity: Int!
-  order: Order @connection(fields: ["orderId"]) # OrderItem belongs to Order
+  order: Order! @connection(fields: ["orderId"]) # OrderItem belongs to Order
 }
