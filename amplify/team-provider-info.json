@@ -13,7 +13,8 @@
     },
     "categories": {
       "auth": {
-        "beermea09a67d7": {}
+        "beermea09a67d7": {},
+        "userPoolGroups": {}
       }
     }
   }
