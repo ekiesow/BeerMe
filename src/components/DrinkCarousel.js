@@ -1,8 +1,13 @@
-import {API} from 'aws-amplify';
+import {API, graphqlOperation} from 'aws-amplify';
 import React, {useEffect, useState} from 'react';
 import {View, Dimensions, StyleSheet} from 'react-native';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
-import {listDrinks} from '../../graphql/queries';
+import {searchDrinks} from '../../graphql/queries';
+import {
+  onCreateDrink,
+  onDeleteDrink,
+  onUpdateDrink,
+} from '../../graphql/subscriptions';
 import MyCard from './MyCard';
 
 const {width: screenWidth} = Dimensions.get('window');
@@ -17,18 +22,66 @@ const DrinkCarousel = () => {
 
   useEffect(() => {
     fetchDrinks();
+    setUpSubscription();
+    console.log('use Effect is called');
+
+    return () => {
+      createDrinkListener.unsubscribe();
+      updateDrinkListener.unsubscribe();
+      deleteDrinkListener.unsubscribe();
+    };
   }, []);
+
+  function setUpSubscription() {
+    createDrinkListener = API.graphql(
+      graphqlOperation(onCreateDrink),
+    ).subscribe({
+      next: (drinkData) => {
+        const newDrink = drinkData.value.data.onCreateDrink; // newly created drink
+        const updatedDrinks = [newDrink, ...drinks];
+        setDrinks(updatedDrinks);
+      },
+    });
+
+    updateDrinkListener = API.graphql(
+      graphqlOperation(onUpdateDrink),
+    ).subscribe({
+      next: (drinkData) => {
+        const updatedDrink = drinkData.value.data.onUpdateDrink; // newly updated drink
+        const index = drinks.findIndex((drink) => drink.id === updatedDrink.id);
+        const updatedDrinks = [
+          ...drinks.slice(0, index),
+          updatedDrink,
+          ...drinks.slice(index + 1),
+        ];
+        setDrinks(updatedDrinks);
+      },
+    });
+
+    deleteDrinkListener = API.graphql(
+      graphqlOperation(onDeleteDrink),
+    ).subscribe({
+      next: (drinkData) => {
+        const deletedDrink = drinkData.value.data.onDeleteDrink; // newly deleted drink
+        const updatedDrinks = drinks.filter(
+          (drink) => drink.id !== deletedDrink.id,
+        );
+        setDrinks(updatedDrinks);
+      },
+    });
+  }
 
   async function fetchDrinks() {
     try {
       const drinkData = await API.graphql({
-        query: listDrinks,
+        query: searchDrinks,
+        sort: {field: 'createdAt', direction: 'desc'},
         authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
-      const drinks = drinkData.data.listDrinks.items;
+      const drinks = drinkData.data.searchDrinks.items;
       setDrinks(drinks);
     } catch (err) {
-      confirm.log('error fetching drinks');
+      console.log('error fetching drinks', err);
     }
   }
 
