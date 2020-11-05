@@ -40,7 +40,9 @@ const DrinkCarousel = () => {
   async function fetchDrinks() {
     try {
       const drinkData = await API.graphql(graphqlOperation(listDrinks));
+      console.log('drink data: ', drinkData);
       const drinks = [drinkData.data.listDrinks.items];
+      console.log('drinks: ', drinks);
       setDrinks(drinks);
     } catch (err) {
       confirm.log('error fetching drinks');
