@@ -1,0 +1,33 @@
+{
+    "bucketName": "beermeimage",
+    "authPolicyName": "s3_amplify_1abd49e8",
+    "unauthPolicyName": "s3_amplify_1abd49e8",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "selectedGuestPermissions": [
+        "s3:GetObject",
+        "s3:ListBucket"
+    ],
+    "selectedAuthenticatedPermissions": [
+        "s3:GetObject",
+        "s3:ListBucket"
+    ],
+    "s3PermissionsAuthenticatedPublic": "s3:GetObject",
+    "s3PublicPolicy": "Public_policy_e99736f6",
+    "s3PermissionsAuthenticatedUploads": "DISALLOW",
+    "s3UploadsPolicy": "Uploads_policy_e99736f6",
+    "s3PermissionsAuthenticatedProtected": "s3:GetObject",
+    "s3ProtectedPolicy": "Protected_policy_1c7e6c3e",
+    "s3PermissionsAuthenticatedPrivate": "s3:GetObject",
+    "s3PrivatePolicy": "Private_policy_1c7e6c3e",
+    "AuthenticatedAllowList": "ALLOW",
+    "s3ReadPolicy": "read_policy_e99736f6",
+    "s3PermissionsGuestPublic": "s3:GetObject",
+    "s3PermissionsGuestUploads": "DISALLOW",
+    "GuestAllowList": "ALLOW",
+    "triggerFunction": "NONE"
+}

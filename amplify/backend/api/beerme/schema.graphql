@@ -1,0 +1,115 @@
+type Drink
+  @model
+  @auth(
+    rules: [
+      {allow: public, operations: [read]} # must have API key configured in aws-exports.js
+      {allow: groups, groups: ["Admin"]} # Admin users can access any operation
+    ]
+  ) {
+  id: ID!
+  drinkName: String!
+  drinkStyle: String
+  abv: String
+  breweryName: String!
+  breweryLocation: String
+  description: String
+  price: Int!
+  image: Image @connection # one-to-one connection: Drink "has one" Image
+}
+
+type S3Object {
+  bucket: String!
+  region: String!
+  key: String!
+}
+
+type Image
+  @model
+  @auth(
+    rules: [
+      {allow: public, operations: [read]} # must have API key configured in aws-exports.js
+      {allow: groups, groups: ["Admin"]} # Admin users can access any operation
+    ]
+  ) {
+  id: ID!
+  name: String
+  # owner: String
+  file: S3Object
+}
+
+type Customer
+  @model
+  @auth(rules: [{allow: owner, operations: [create, read, update]}]) {
+  id: ID!
+  userId: String!
+  username: String!
+  email: String!
+  firstName: String!
+  lastName: String!
+  phoneNumber: String
+  address: Address
+  shippingAddress: Address
+  ordersByDate: [Order] @connection(keyName: "byCustomerByDate", fields: ["id"]) # one-to-many connection: Customer "has many" orders
+  ordersByStatusByDate: [Order]
+    @connection(keyName: "byCustomerByStatusByDate", fields: ["id"]) # one-to-many connection: Customer "has many" orders
+}
+
+type Address @model @auth(rules: [{allow: owner}]) {
+  id: ID!
+  userId: String!
+  firstName: String!
+  lastName: String!
+  address1: String!
+  address2: String
+  city: String!
+  state: String!
+  postalCode: String!
+}
+
+enum OrderStatus {
+  DELIVERED
+  SHIPPED
+  PENDING
+  DELAYED
+  CANCELLED
+  UNKNOWN
+  OPEN
+}
+
+type Order
+  @model
+  @auth(rules: [{allow: owner}])
+  @key(name: "byCustomerByDate", fields: ["customerId", "createdAt"]) # @key allows Orders to be queried by userId and createdAt
+  @key(
+    name: "byCustomerByStatusByDate"
+    fields: ["customerId", "status", "createdAt"]
+  ) { # query orders by userId and status and createdAt
+  id: ID!
+  customerId: ID!
+  userId: String!
+  customerEmail: String!
+  createdAt: AWSDateTime!
+  amount: Int!
+  status: OrderStatus!
+  customer: Customer @connection(fields: ["customerId"]) # Add many-to-one connection to type that has one-to-many. Each Order "belongs to" a Customer.
+  shippingAddress: Address!
+  orderItems: [OrderItem]
+    @connection(keyName: "orderItemByOrder", fields: ["id"]) # Order has many CartItems
+}
+
+type OrderItem
+  @model
+  @auth(rules: [{allow: owner}])
+  @key(
+    name: "orderItemByOrder"
+    fields: ["orderId"]
+    queryField: "orderItemByOrderId"
+  ) {
+  id: ID!
+  orderId: ID!
+  drinkId: ID!
+  drink: Drink @connection(fields: ["drinkId"])
+  userId: String!
+  quantity: Int!
+  order: Order! @connection(fields: ["orderId"]) # OrderItem belongs to Order
+}
