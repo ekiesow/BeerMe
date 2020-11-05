@@ -1,39 +1,51 @@
+import {API, graphqlOperation} from 'aws-amplify';
 import React, {useEffect, useState} from 'react';
 import {View, Dimensions, StyleSheet} from 'react-native';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
+import {listDrinks} from '../../graphql/queries';
 import MyCard from './MyCard';
 
 const {width: screenWidth} = Dimensions.get('window');
 const ITEM_WIDTH = screenWidth - 60;
 const ITEM_HEIGHT = screenWidth - 60;
 
-const drinks = [
-  {
-    drinkName: 'Double Dry Hopped Green City',
-    breweryName: 'Other Half Brewing Co.',
-    content: "Try this beer! It's great!",
-  },
-  {
-    drinkName: 'Double Scatterbrain DDH W/ Citra',
-    breweryName: 'Bearded Iris Brewing',
-    content: "Try this beer! It's even better!",
-  },
-  {
-    drinkName: 'Prickle My Fancy Slushy',
-    breweryName: '903 Brewers',
-    content: "Try this beer! It's great!",
-  },
-];
+// const drinks = [
+//   {
+//     drinkName: 'Double Dry Hopped Green City',
+//     breweryName: 'Other Half Brewing Co.',
+//     content: "Try this beer! It's great!",
+//   },
+//   {
+//     drinkName: 'Double Scatterbrain DDH W/ Citra',
+//     breweryName: 'Bearded Iris Brewing',
+//     content: "Try this beer! It's even better!",
+//   },
+//   {
+//     drinkName: 'Prickle My Fancy Slushy',
+//     breweryName: '903 Brewers',
+//     content: "Try this beer! It's great!",
+//   },
+// ];
+
+const initialState = [{drinkName: '', breweryName: '', description: ''}];
 
 const DrinkCarousel = () => {
   const [activeSlide, setActiveSlide] = useState(0);
-  // const [drinks, setDrinks] = useState([]);
-  // useEffect(() => {
-  //   // graphql getDrinks api call
+  const [drinks, setDrinks] = useState(initialState);
 
-  //   // set drinks
-  //   setDrinks();
-  // }, []);
+  useEffect(() => {
+    fetchDrinks();
+  }, []);
+
+  async function fetchDrinks() {
+    try {
+      const drinkData = await API.graphql(graphqlOperation(listDrinks));
+      const drinks = [drinkData.data.listDrinks.items];
+      setDrinks(drinks);
+    } catch (err) {
+      confirm.log('error fetching drinks');
+    }
+  }
 
   const renderItem = ({item, index}) => {
     return (
