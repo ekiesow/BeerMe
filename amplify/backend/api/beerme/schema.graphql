@@ -2,7 +2,7 @@ type Drink
   @model
   @auth(
     rules: [
-      {allow: public, operations: [read]} # must have API key configured in aws-exports.js
+      {allow: private, operations: [read]} # must have API key configured in aws-exports.js
       {allow: groups, groups: ["Admin"]} # Admin users can access any operation
     ]
   ) {
@@ -27,7 +27,7 @@ type Image
   @model
   @auth(
     rules: [
-      {allow: public, operations: [read]} # must have API key configured in aws-exports.js
+      {allow: private, operations: [read]} # must have API key configured in aws-exports.js
       {allow: groups, groups: ["Admin"]} # Admin users can access any operation
     ]
   ) {
