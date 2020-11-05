@@ -1,5 +1,6 @@
 type Drink
   @model
+  @searchable
   @auth(
     rules: [
       {allow: private, operations: [read]} # must have API key configured in aws-exports.js
@@ -7,6 +8,7 @@ type Drink
     ]
   ) {
   id: ID!
+  createdAt: AWSDateTime!
   drinkName: String!
   drinkStyle: String
   abv: String

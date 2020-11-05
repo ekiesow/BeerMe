@@ -1,6 +1,83 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getDrink = /* GraphQL */ `
+  query GetDrink($id: ID!) {
+    getDrink(id: $id) {
+      id
+      createdAt
+      drinkName
+      drinkStyle
+      abv
+      breweryName
+      breweryLocation
+      description
+      price
+      image {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      updatedAt
+    }
+  }
+`;
+export const listDrinks = /* GraphQL */ `
+  query ListDrinks(
+    $filter: ModelDrinkFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listDrinks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        createdAt
+        drinkName
+        drinkStyle
+        abv
+        breweryName
+        breweryLocation
+        description
+        price
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getImage = /* GraphQL */ `
+  query GetImage($id: ID!) {
+    getImage(id: $id) {
+      id
+      name
+      file {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listImages = /* GraphQL */ `
+  query ListImages(
+    $filter: ModelImageFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listImages(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getCustomer = /* GraphQL */ `
   query GetCustomer($id: ID!) {
     getCustomer(id: $id) {
@@ -40,31 +117,9 @@ export const getCustomer = /* GraphQL */ `
         owner
       }
       ordersByDate {
-        items {
-          id
-          customerId
-          userId
-          customerEmail
-          createdAt
-          amount
-          status
-          updatedAt
-          owner
-        }
         nextToken
       }
       ordersByStatusByDate {
-        items {
-          id
-          customerId
-          userId
-          customerEmail
-          createdAt
-          amount
-          status
-          updatedAt
-          owner
-        }
         nextToken
       }
       createdAt
@@ -88,40 +143,6 @@ export const listCustomers = /* GraphQL */ `
         firstName
         lastName
         phoneNumber
-        address {
-          id
-          userId
-          firstName
-          lastName
-          address1
-          address2
-          city
-          state
-          postalCode
-          createdAt
-          updatedAt
-          owner
-        }
-        shippingAddress {
-          id
-          userId
-          firstName
-          lastName
-          address1
-          address2
-          city
-          state
-          postalCode
-          createdAt
-          updatedAt
-          owner
-        }
-        ordersByDate {
-          nextToken
-        }
-        ordersByStatusByDate {
-          nextToken
-        }
         createdAt
         updatedAt
         owner
@@ -191,40 +212,6 @@ export const getOrder = /* GraphQL */ `
         firstName
         lastName
         phoneNumber
-        address {
-          id
-          userId
-          firstName
-          lastName
-          address1
-          address2
-          city
-          state
-          postalCode
-          createdAt
-          updatedAt
-          owner
-        }
-        shippingAddress {
-          id
-          userId
-          firstName
-          lastName
-          address1
-          address2
-          city
-          state
-          postalCode
-          createdAt
-          updatedAt
-          owner
-        }
-        ordersByDate {
-          nextToken
-        }
-        ordersByStatusByDate {
-          nextToken
-        }
         createdAt
         updatedAt
         owner
@@ -244,16 +231,6 @@ export const getOrder = /* GraphQL */ `
         owner
       }
       orderItems {
-        items {
-          id
-          orderId
-          drinkId
-          userId
-          quantity
-          createdAt
-          updatedAt
-          owner
-        }
         nextToken
       }
       updatedAt
@@ -276,35 +253,6 @@ export const listOrders = /* GraphQL */ `
         createdAt
         amount
         status
-        customer {
-          id
-          userId
-          username
-          email
-          firstName
-          lastName
-          phoneNumber
-          createdAt
-          updatedAt
-          owner
-        }
-        shippingAddress {
-          id
-          userId
-          firstName
-          lastName
-          address1
-          address2
-          city
-          state
-          postalCode
-          createdAt
-          updatedAt
-          owner
-        }
-        orderItems {
-          nextToken
-        }
         updatedAt
         owner
       }
@@ -318,6 +266,18 @@ export const getOrderItem = /* GraphQL */ `
       id
       orderId
       drinkId
+      drink {
+        id
+        createdAt
+        drinkName
+        drinkStyle
+        abv
+        breweryName
+        breweryLocation
+        description
+        price
+        updatedAt
+      }
       userId
       quantity
       order {
@@ -328,58 +288,11 @@ export const getOrderItem = /* GraphQL */ `
         createdAt
         amount
         status
-        customer {
-          id
-          userId
-          username
-          email
-          firstName
-          lastName
-          phoneNumber
-          createdAt
-          updatedAt
-          owner
-        }
-        shippingAddress {
-          id
-          userId
-          firstName
-          lastName
-          address1
-          address2
-          city
-          state
-          postalCode
-          createdAt
-          updatedAt
-          owner
-        }
-        orderItems {
-          nextToken
-        }
         updatedAt
         owner
       }
       createdAt
       updatedAt
-      drink {
-        id
-        drinkName
-        drinkStyle
-        abv
-        breweryName
-        breweryLocation
-        description
-        price
-        createdAt
-        updatedAt
-        image {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-      }
       owner
     }
   }
@@ -397,31 +310,8 @@ export const listOrderItems = /* GraphQL */ `
         drinkId
         userId
         quantity
-        order {
-          id
-          customerId
-          userId
-          customerEmail
-          createdAt
-          amount
-          status
-          updatedAt
-          owner
-        }
         createdAt
         updatedAt
-        drink {
-          id
-          drinkName
-          drinkStyle
-          abv
-          breweryName
-          breweryLocation
-          description
-          price
-          createdAt
-          updatedAt
-        }
         owner
       }
       nextToken
@@ -449,46 +339,32 @@ export const orderItemByOrderId = /* GraphQL */ `
         drinkId
         userId
         quantity
-        order {
-          id
-          customerId
-          userId
-          customerEmail
-          createdAt
-          amount
-          status
-          updatedAt
-          owner
-        }
         createdAt
         updatedAt
-        drink {
-          id
-          drinkName
-          drinkStyle
-          abv
-          breweryName
-          breweryLocation
-          description
-          price
-          createdAt
-          updatedAt
-        }
         owner
       }
       nextToken
     }
   }
 `;
-export const listDrinks = /* GraphQL */ `
-  query ListDrinks(
-    $filter: ModelDrinkFilterInput
+export const searchDrinks = /* GraphQL */ `
+  query SearchDrinks(
+    $filter: SearchableDrinkFilterInput
+    $sort: SearchableDrinkSortInput
     $limit: Int
     $nextToken: String
+    $from: Int
   ) {
-    listDrinks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    searchDrinks(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+    ) {
       items {
         id
+        createdAt
         drinkName
         drinkStyle
         abv
@@ -496,80 +372,10 @@ export const listDrinks = /* GraphQL */ `
         breweryLocation
         description
         price
-        createdAt
-        updatedAt
-        image {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-      }
-      nextToken
-    }
-  }
-`;
-export const getDrink = /* GraphQL */ `
-  query GetDrink($id: ID!) {
-    getDrink(id: $id) {
-      id
-      drinkName
-      drinkStyle
-      abv
-      breweryName
-      breweryLocation
-      description
-      price
-      createdAt
-      updatedAt
-      image {
-        id
-        name
-        file {
-          bucket
-          region
-          key
-        }
-        createdAt
-        updatedAt
-      }
-    }
-  }
-`;
-export const listImages = /* GraphQL */ `
-  query ListImages(
-    $filter: ModelImageFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listImages(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        file {
-          bucket
-          region
-          key
-        }
-        createdAt
         updatedAt
       }
       nextToken
-    }
-  }
-`;
-export const getImage = /* GraphQL */ `
-  query GetImage($id: ID!) {
-    getImage(id: $id) {
-      id
-      name
-      file {
-        bucket
-        region
-        key
-      }
-      createdAt
-      updatedAt
+      total
     }
   }
 `;

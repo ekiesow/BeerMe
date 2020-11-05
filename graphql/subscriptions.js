@@ -1,6 +1,117 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateDrink = /* GraphQL */ `
+  subscription OnCreateDrink {
+    onCreateDrink {
+      id
+      createdAt
+      drinkName
+      drinkStyle
+      abv
+      breweryName
+      breweryLocation
+      description
+      price
+      image {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      updatedAt
+    }
+  }
+`;
+export const onUpdateDrink = /* GraphQL */ `
+  subscription OnUpdateDrink {
+    onUpdateDrink {
+      id
+      createdAt
+      drinkName
+      drinkStyle
+      abv
+      breweryName
+      breweryLocation
+      description
+      price
+      image {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      updatedAt
+    }
+  }
+`;
+export const onDeleteDrink = /* GraphQL */ `
+  subscription OnDeleteDrink {
+    onDeleteDrink {
+      id
+      createdAt
+      drinkName
+      drinkStyle
+      abv
+      breweryName
+      breweryLocation
+      description
+      price
+      image {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      updatedAt
+    }
+  }
+`;
+export const onCreateImage = /* GraphQL */ `
+  subscription OnCreateImage {
+    onCreateImage {
+      id
+      name
+      file {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateImage = /* GraphQL */ `
+  subscription OnUpdateImage {
+    onUpdateImage {
+      id
+      name
+      file {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteImage = /* GraphQL */ `
+  subscription OnDeleteImage {
+    onDeleteImage {
+      id
+      name
+      file {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateCustomer = /* GraphQL */ `
   subscription OnCreateCustomer($owner: String!) {
     onCreateCustomer(owner: $owner) {
@@ -40,31 +151,9 @@ export const onCreateCustomer = /* GraphQL */ `
         owner
       }
       ordersByDate {
-        items {
-          id
-          customerId
-          userId
-          customerEmail
-          createdAt
-          amount
-          status
-          updatedAt
-          owner
-        }
         nextToken
       }
       ordersByStatusByDate {
-        items {
-          id
-          customerId
-          userId
-          customerEmail
-          createdAt
-          amount
-          status
-          updatedAt
-          owner
-        }
         nextToken
       }
       createdAt
@@ -112,31 +201,9 @@ export const onUpdateCustomer = /* GraphQL */ `
         owner
       }
       ordersByDate {
-        items {
-          id
-          customerId
-          userId
-          customerEmail
-          createdAt
-          amount
-          status
-          updatedAt
-          owner
-        }
         nextToken
       }
       ordersByStatusByDate {
-        items {
-          id
-          customerId
-          userId
-          customerEmail
-          createdAt
-          amount
-          status
-          updatedAt
-          owner
-        }
         nextToken
       }
       createdAt
@@ -184,31 +251,9 @@ export const onDeleteCustomer = /* GraphQL */ `
         owner
       }
       ordersByDate {
-        items {
-          id
-          customerId
-          userId
-          customerEmail
-          createdAt
-          amount
-          status
-          updatedAt
-          owner
-        }
         nextToken
       }
       ordersByStatusByDate {
-        items {
-          id
-          customerId
-          userId
-          customerEmail
-          createdAt
-          amount
-          status
-          updatedAt
-          owner
-        }
         nextToken
       }
       createdAt
@@ -289,40 +334,6 @@ export const onCreateOrder = /* GraphQL */ `
         firstName
         lastName
         phoneNumber
-        address {
-          id
-          userId
-          firstName
-          lastName
-          address1
-          address2
-          city
-          state
-          postalCode
-          createdAt
-          updatedAt
-          owner
-        }
-        shippingAddress {
-          id
-          userId
-          firstName
-          lastName
-          address1
-          address2
-          city
-          state
-          postalCode
-          createdAt
-          updatedAt
-          owner
-        }
-        ordersByDate {
-          nextToken
-        }
-        ordersByStatusByDate {
-          nextToken
-        }
         createdAt
         updatedAt
         owner
@@ -342,16 +353,6 @@ export const onCreateOrder = /* GraphQL */ `
         owner
       }
       orderItems {
-        items {
-          id
-          orderId
-          drinkId
-          userId
-          quantity
-          createdAt
-          updatedAt
-          owner
-        }
         nextToken
       }
       updatedAt
@@ -377,40 +378,6 @@ export const onUpdateOrder = /* GraphQL */ `
         firstName
         lastName
         phoneNumber
-        address {
-          id
-          userId
-          firstName
-          lastName
-          address1
-          address2
-          city
-          state
-          postalCode
-          createdAt
-          updatedAt
-          owner
-        }
-        shippingAddress {
-          id
-          userId
-          firstName
-          lastName
-          address1
-          address2
-          city
-          state
-          postalCode
-          createdAt
-          updatedAt
-          owner
-        }
-        ordersByDate {
-          nextToken
-        }
-        ordersByStatusByDate {
-          nextToken
-        }
         createdAt
         updatedAt
         owner
@@ -430,16 +397,6 @@ export const onUpdateOrder = /* GraphQL */ `
         owner
       }
       orderItems {
-        items {
-          id
-          orderId
-          drinkId
-          userId
-          quantity
-          createdAt
-          updatedAt
-          owner
-        }
         nextToken
       }
       updatedAt
@@ -465,40 +422,6 @@ export const onDeleteOrder = /* GraphQL */ `
         firstName
         lastName
         phoneNumber
-        address {
-          id
-          userId
-          firstName
-          lastName
-          address1
-          address2
-          city
-          state
-          postalCode
-          createdAt
-          updatedAt
-          owner
-        }
-        shippingAddress {
-          id
-          userId
-          firstName
-          lastName
-          address1
-          address2
-          city
-          state
-          postalCode
-          createdAt
-          updatedAt
-          owner
-        }
-        ordersByDate {
-          nextToken
-        }
-        ordersByStatusByDate {
-          nextToken
-        }
         createdAt
         updatedAt
         owner
@@ -518,16 +441,6 @@ export const onDeleteOrder = /* GraphQL */ `
         owner
       }
       orderItems {
-        items {
-          id
-          orderId
-          drinkId
-          userId
-          quantity
-          createdAt
-          updatedAt
-          owner
-        }
         nextToken
       }
       updatedAt
@@ -541,6 +454,18 @@ export const onCreateOrderItem = /* GraphQL */ `
       id
       orderId
       drinkId
+      drink {
+        id
+        createdAt
+        drinkName
+        drinkStyle
+        abv
+        breweryName
+        breweryLocation
+        description
+        price
+        updatedAt
+      }
       userId
       quantity
       order {
@@ -551,58 +476,11 @@ export const onCreateOrderItem = /* GraphQL */ `
         createdAt
         amount
         status
-        customer {
-          id
-          userId
-          username
-          email
-          firstName
-          lastName
-          phoneNumber
-          createdAt
-          updatedAt
-          owner
-        }
-        shippingAddress {
-          id
-          userId
-          firstName
-          lastName
-          address1
-          address2
-          city
-          state
-          postalCode
-          createdAt
-          updatedAt
-          owner
-        }
-        orderItems {
-          nextToken
-        }
         updatedAt
         owner
       }
       createdAt
       updatedAt
-      drink {
-        id
-        drinkName
-        drinkStyle
-        abv
-        breweryName
-        breweryLocation
-        description
-        price
-        createdAt
-        updatedAt
-        image {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-      }
       owner
     }
   }
@@ -613,6 +491,18 @@ export const onUpdateOrderItem = /* GraphQL */ `
       id
       orderId
       drinkId
+      drink {
+        id
+        createdAt
+        drinkName
+        drinkStyle
+        abv
+        breweryName
+        breweryLocation
+        description
+        price
+        updatedAt
+      }
       userId
       quantity
       order {
@@ -623,58 +513,11 @@ export const onUpdateOrderItem = /* GraphQL */ `
         createdAt
         amount
         status
-        customer {
-          id
-          userId
-          username
-          email
-          firstName
-          lastName
-          phoneNumber
-          createdAt
-          updatedAt
-          owner
-        }
-        shippingAddress {
-          id
-          userId
-          firstName
-          lastName
-          address1
-          address2
-          city
-          state
-          postalCode
-          createdAt
-          updatedAt
-          owner
-        }
-        orderItems {
-          nextToken
-        }
         updatedAt
         owner
       }
       createdAt
       updatedAt
-      drink {
-        id
-        drinkName
-        drinkStyle
-        abv
-        breweryName
-        breweryLocation
-        description
-        price
-        createdAt
-        updatedAt
-        image {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-      }
       owner
     }
   }
@@ -685,6 +528,18 @@ export const onDeleteOrderItem = /* GraphQL */ `
       id
       orderId
       drinkId
+      drink {
+        id
+        createdAt
+        drinkName
+        drinkStyle
+        abv
+        breweryName
+        breweryLocation
+        description
+        price
+        updatedAt
+      }
       userId
       quantity
       order {
@@ -695,185 +550,12 @@ export const onDeleteOrderItem = /* GraphQL */ `
         createdAt
         amount
         status
-        customer {
-          id
-          userId
-          username
-          email
-          firstName
-          lastName
-          phoneNumber
-          createdAt
-          updatedAt
-          owner
-        }
-        shippingAddress {
-          id
-          userId
-          firstName
-          lastName
-          address1
-          address2
-          city
-          state
-          postalCode
-          createdAt
-          updatedAt
-          owner
-        }
-        orderItems {
-          nextToken
-        }
         updatedAt
         owner
       }
       createdAt
       updatedAt
-      drink {
-        id
-        drinkName
-        drinkStyle
-        abv
-        breweryName
-        breweryLocation
-        description
-        price
-        createdAt
-        updatedAt
-        image {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-      }
       owner
-    }
-  }
-`;
-export const onCreateDrink = /* GraphQL */ `
-  subscription OnCreateDrink {
-    onCreateDrink {
-      id
-      drinkName
-      drinkStyle
-      abv
-      breweryName
-      breweryLocation
-      description
-      price
-      createdAt
-      updatedAt
-      image {
-        id
-        name
-        file {
-          bucket
-          region
-          key
-        }
-        createdAt
-        updatedAt
-      }
-    }
-  }
-`;
-export const onUpdateDrink = /* GraphQL */ `
-  subscription OnUpdateDrink {
-    onUpdateDrink {
-      id
-      drinkName
-      drinkStyle
-      abv
-      breweryName
-      breweryLocation
-      description
-      price
-      createdAt
-      updatedAt
-      image {
-        id
-        name
-        file {
-          bucket
-          region
-          key
-        }
-        createdAt
-        updatedAt
-      }
-    }
-  }
-`;
-export const onDeleteDrink = /* GraphQL */ `
-  subscription OnDeleteDrink {
-    onDeleteDrink {
-      id
-      drinkName
-      drinkStyle
-      abv
-      breweryName
-      breweryLocation
-      description
-      price
-      createdAt
-      updatedAt
-      image {
-        id
-        name
-        file {
-          bucket
-          region
-          key
-        }
-        createdAt
-        updatedAt
-      }
-    }
-  }
-`;
-export const onCreateImage = /* GraphQL */ `
-  subscription OnCreateImage {
-    onCreateImage {
-      id
-      name
-      file {
-        bucket
-        region
-        key
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateImage = /* GraphQL */ `
-  subscription OnUpdateImage {
-    onUpdateImage {
-      id
-      name
-      file {
-        bucket
-        region
-        key
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteImage = /* GraphQL */ `
-  subscription OnDeleteImage {
-    onDeleteImage {
-      id
-      name
-      file {
-        bucket
-        region
-        key
-      }
-      createdAt
-      updatedAt
     }
   }
 `;

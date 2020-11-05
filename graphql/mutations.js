@@ -8,6 +8,7 @@ export const createDrink = /* GraphQL */ `
   ) {
     createDrink(input: $input, condition: $condition) {
       id
+      createdAt
       drinkName
       drinkStyle
       abv
@@ -15,19 +16,13 @@ export const createDrink = /* GraphQL */ `
       breweryLocation
       description
       price
-      createdAt
-      updatedAt
       image {
         id
         name
-        file {
-          bucket
-          region
-          key
-        }
         createdAt
         updatedAt
       }
+      updatedAt
     }
   }
 `;
@@ -38,6 +33,7 @@ export const updateDrink = /* GraphQL */ `
   ) {
     updateDrink(input: $input, condition: $condition) {
       id
+      createdAt
       drinkName
       drinkStyle
       abv
@@ -45,19 +41,13 @@ export const updateDrink = /* GraphQL */ `
       breweryLocation
       description
       price
-      createdAt
-      updatedAt
       image {
         id
         name
-        file {
-          bucket
-          region
-          key
-        }
         createdAt
         updatedAt
       }
+      updatedAt
     }
   }
 `;
@@ -68,6 +58,7 @@ export const deleteDrink = /* GraphQL */ `
   ) {
     deleteDrink(input: $input, condition: $condition) {
       id
+      createdAt
       drinkName
       drinkStyle
       abv
@@ -75,19 +66,13 @@ export const deleteDrink = /* GraphQL */ `
       breweryLocation
       description
       price
-      createdAt
-      updatedAt
       image {
         id
         name
-        file {
-          bucket
-          region
-          key
-        }
         createdAt
         updatedAt
       }
+      updatedAt
     }
   }
 `;
@@ -187,31 +172,9 @@ export const createCustomer = /* GraphQL */ `
         owner
       }
       ordersByDate {
-        items {
-          id
-          customerId
-          userId
-          customerEmail
-          createdAt
-          amount
-          status
-          updatedAt
-          owner
-        }
         nextToken
       }
       ordersByStatusByDate {
-        items {
-          id
-          customerId
-          userId
-          customerEmail
-          createdAt
-          amount
-          status
-          updatedAt
-          owner
-        }
         nextToken
       }
       createdAt
@@ -262,31 +225,9 @@ export const updateCustomer = /* GraphQL */ `
         owner
       }
       ordersByDate {
-        items {
-          id
-          customerId
-          userId
-          customerEmail
-          createdAt
-          amount
-          status
-          updatedAt
-          owner
-        }
         nextToken
       }
       ordersByStatusByDate {
-        items {
-          id
-          customerId
-          userId
-          customerEmail
-          createdAt
-          amount
-          status
-          updatedAt
-          owner
-        }
         nextToken
       }
       createdAt
@@ -337,31 +278,9 @@ export const deleteCustomer = /* GraphQL */ `
         owner
       }
       ordersByDate {
-        items {
-          id
-          customerId
-          userId
-          customerEmail
-          createdAt
-          amount
-          status
-          updatedAt
-          owner
-        }
         nextToken
       }
       ordersByStatusByDate {
-        items {
-          id
-          customerId
-          userId
-          customerEmail
-          createdAt
-          amount
-          status
-          updatedAt
-          owner
-        }
         nextToken
       }
       createdAt
@@ -454,40 +373,6 @@ export const createOrder = /* GraphQL */ `
         firstName
         lastName
         phoneNumber
-        address {
-          id
-          userId
-          firstName
-          lastName
-          address1
-          address2
-          city
-          state
-          postalCode
-          createdAt
-          updatedAt
-          owner
-        }
-        shippingAddress {
-          id
-          userId
-          firstName
-          lastName
-          address1
-          address2
-          city
-          state
-          postalCode
-          createdAt
-          updatedAt
-          owner
-        }
-        ordersByDate {
-          nextToken
-        }
-        ordersByStatusByDate {
-          nextToken
-        }
         createdAt
         updatedAt
         owner
@@ -507,16 +392,6 @@ export const createOrder = /* GraphQL */ `
         owner
       }
       orderItems {
-        items {
-          id
-          orderId
-          drinkId
-          userId
-          quantity
-          createdAt
-          updatedAt
-          owner
-        }
         nextToken
       }
       updatedAt
@@ -545,40 +420,6 @@ export const updateOrder = /* GraphQL */ `
         firstName
         lastName
         phoneNumber
-        address {
-          id
-          userId
-          firstName
-          lastName
-          address1
-          address2
-          city
-          state
-          postalCode
-          createdAt
-          updatedAt
-          owner
-        }
-        shippingAddress {
-          id
-          userId
-          firstName
-          lastName
-          address1
-          address2
-          city
-          state
-          postalCode
-          createdAt
-          updatedAt
-          owner
-        }
-        ordersByDate {
-          nextToken
-        }
-        ordersByStatusByDate {
-          nextToken
-        }
         createdAt
         updatedAt
         owner
@@ -598,16 +439,6 @@ export const updateOrder = /* GraphQL */ `
         owner
       }
       orderItems {
-        items {
-          id
-          orderId
-          drinkId
-          userId
-          quantity
-          createdAt
-          updatedAt
-          owner
-        }
         nextToken
       }
       updatedAt
@@ -636,40 +467,6 @@ export const deleteOrder = /* GraphQL */ `
         firstName
         lastName
         phoneNumber
-        address {
-          id
-          userId
-          firstName
-          lastName
-          address1
-          address2
-          city
-          state
-          postalCode
-          createdAt
-          updatedAt
-          owner
-        }
-        shippingAddress {
-          id
-          userId
-          firstName
-          lastName
-          address1
-          address2
-          city
-          state
-          postalCode
-          createdAt
-          updatedAt
-          owner
-        }
-        ordersByDate {
-          nextToken
-        }
-        ordersByStatusByDate {
-          nextToken
-        }
         createdAt
         updatedAt
         owner
@@ -689,16 +486,6 @@ export const deleteOrder = /* GraphQL */ `
         owner
       }
       orderItems {
-        items {
-          id
-          orderId
-          drinkId
-          userId
-          quantity
-          createdAt
-          updatedAt
-          owner
-        }
         nextToken
       }
       updatedAt
@@ -715,6 +502,18 @@ export const createOrderItem = /* GraphQL */ `
       id
       orderId
       drinkId
+      drink {
+        id
+        createdAt
+        drinkName
+        drinkStyle
+        abv
+        breweryName
+        breweryLocation
+        description
+        price
+        updatedAt
+      }
       userId
       quantity
       order {
@@ -725,58 +524,11 @@ export const createOrderItem = /* GraphQL */ `
         createdAt
         amount
         status
-        customer {
-          id
-          userId
-          username
-          email
-          firstName
-          lastName
-          phoneNumber
-          createdAt
-          updatedAt
-          owner
-        }
-        shippingAddress {
-          id
-          userId
-          firstName
-          lastName
-          address1
-          address2
-          city
-          state
-          postalCode
-          createdAt
-          updatedAt
-          owner
-        }
-        orderItems {
-          nextToken
-        }
         updatedAt
         owner
       }
       createdAt
       updatedAt
-      drink {
-        id
-        drinkName
-        drinkStyle
-        abv
-        breweryName
-        breweryLocation
-        description
-        price
-        createdAt
-        updatedAt
-        image {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-      }
       owner
     }
   }
@@ -790,6 +542,18 @@ export const updateOrderItem = /* GraphQL */ `
       id
       orderId
       drinkId
+      drink {
+        id
+        createdAt
+        drinkName
+        drinkStyle
+        abv
+        breweryName
+        breweryLocation
+        description
+        price
+        updatedAt
+      }
       userId
       quantity
       order {
@@ -800,58 +564,11 @@ export const updateOrderItem = /* GraphQL */ `
         createdAt
         amount
         status
-        customer {
-          id
-          userId
-          username
-          email
-          firstName
-          lastName
-          phoneNumber
-          createdAt
-          updatedAt
-          owner
-        }
-        shippingAddress {
-          id
-          userId
-          firstName
-          lastName
-          address1
-          address2
-          city
-          state
-          postalCode
-          createdAt
-          updatedAt
-          owner
-        }
-        orderItems {
-          nextToken
-        }
         updatedAt
         owner
       }
       createdAt
       updatedAt
-      drink {
-        id
-        drinkName
-        drinkStyle
-        abv
-        breweryName
-        breweryLocation
-        description
-        price
-        createdAt
-        updatedAt
-        image {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-      }
       owner
     }
   }
@@ -865,6 +582,18 @@ export const deleteOrderItem = /* GraphQL */ `
       id
       orderId
       drinkId
+      drink {
+        id
+        createdAt
+        drinkName
+        drinkStyle
+        abv
+        breweryName
+        breweryLocation
+        description
+        price
+        updatedAt
+      }
       userId
       quantity
       order {
@@ -875,58 +604,11 @@ export const deleteOrderItem = /* GraphQL */ `
         createdAt
         amount
         status
-        customer {
-          id
-          userId
-          username
-          email
-          firstName
-          lastName
-          phoneNumber
-          createdAt
-          updatedAt
-          owner
-        }
-        shippingAddress {
-          id
-          userId
-          firstName
-          lastName
-          address1
-          address2
-          city
-          state
-          postalCode
-          createdAt
-          updatedAt
-          owner
-        }
-        orderItems {
-          nextToken
-        }
         updatedAt
         owner
       }
       createdAt
       updatedAt
-      drink {
-        id
-        drinkName
-        drinkStyle
-        abv
-        breweryName
-        breweryLocation
-        description
-        price
-        createdAt
-        updatedAt
-        image {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-      }
       owner
     }
   }
