@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  Text,
-} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 
 const ProfileScreen = () => {
   return (
@@ -16,9 +12,9 @@ const ProfileScreen = () => {
 const styles = StyleSheet.create({
   center: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
   },
 });
 
