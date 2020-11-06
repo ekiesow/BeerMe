@@ -87,28 +87,8 @@ const DrinkCarousel = () => {
 
   const renderItem = ({item, index}) => {
     return (
-      <View key={index} style={styles.container}>
-        <MyCard data={item} style={styles.card} />
-        <Pagination
-          dotsLength={drinks.length}
-          activeDotIndex={activeSlide}
-          dotStyle={{
-            width: 10,
-            height: 10,
-            borderRadius: 5,
-            marginHorizontal: 8,
-            backgroundColor: 'rgba(0, 0, 0, 0.60)',
-          }}
-          inactiveDotStyle={{
-            width: 10,
-            height: 10,
-            borderRadius: 5,
-            marginHorizontal: 8,
-            backgroundColor: 'rgba(0, 0, 0, 0.20)',
-          }}
-          inactiveDotOpacity={0.4}
-          inactiveDotScale={0.8}
-        />
+      <View style={styles.container}>
+        <MyCard key={index} data={item} style={styles.card} />
       </View>
     );
   };
@@ -124,6 +104,26 @@ const DrinkCarousel = () => {
         renderItem={renderItem}
         style={styles.carousel}
         onSnapToItem={(index) => setActiveSlide(index)}
+      />
+      <Pagination
+        dotsLength={drinks.length}
+        activeDotIndex={activeSlide}
+        dotStyle={{
+          width: 10,
+          height: 10,
+          borderRadius: 5,
+          marginHorizontal: 8,
+          backgroundColor: 'rgba(0, 0, 0, 0.60)',
+        }}
+        inactiveDotStyle={{
+          width: 10,
+          height: 10,
+          borderRadius: 5,
+          marginHorizontal: 8,
+          backgroundColor: 'rgba(0, 0, 0, 0.20)',
+        }}
+        inactiveDotOpacity={0.4}
+        inactiveDotScale={0.8}
       />
     </>
   );
