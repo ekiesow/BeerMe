@@ -1,5 +1,5 @@
 import React from 'react';
-import {Avatar, Button, Card, Title, Paragraph} from 'react-native-paper';
+import {Button, Card, Paragraph} from 'react-native-paper';
 import {Dimensions, StyleSheet} from 'react-native';
 
 const {width, height} = Dimensions.get('window');
@@ -12,12 +12,21 @@ const MyCard = (props) => (
     />
     <Card.Title
       title={props.data.drinkName}
-      subtitle={props.data.breweryName}
-      //   left={LeftContent}
+      subtitle={
+        props.data.breweryName +
+        ', ' +
+        props.data.breweryLocation +
+        '\n' +
+        props.data.drinkStyle +
+        ' - ABV:' +
+        props.data.abv
+      }
+      subtitleNumberOfLines={2}
+      subtitleStyle={styles.subtitleStyle}
     />
     <Card.Content>
       {/* <Title>{props.title}</Title> */}
-      <Paragraph>{props.data.content}</Paragraph>
+      <Paragraph>{props.data.description}</Paragraph>
     </Card.Content>
     <Card.Actions style={styles.cardActions}>
       <Button>Let's Do It</Button>
@@ -31,6 +40,9 @@ const styles = StyleSheet.create({
   },
   cardCover: {
     resizeMode: 'cover',
+  },
+  subtitleStyle: {
+    fontSize: 18,
   },
 });
 
