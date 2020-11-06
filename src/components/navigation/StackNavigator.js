@@ -1,5 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
+import {Auth} from 'aws-amplify';
+import {IconButton, Colors} from 'react-native-paper';
 
 import Home from '../../screens/HomeScreen';
 import Orders from '../../screens/OrdersScreen';
@@ -35,9 +37,30 @@ const OrdersStackNavigator = () => {
 };
 
 const ProfileStackNavigator = () => {
+  async function signOut() {
+    try {
+      await Auth.signOut();
+    } catch (err) {
+      console.log('Error signing out: ', err);
+    }
+  }
+
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerRight: () => (
+            <IconButton
+              icon="logout-variant"
+              color={Colors.amber800}
+              size={30}
+              onPress={signOut}
+            />
+          ),
+        }}
+      />
       <Stack.Screen name="Settings" component={Settings} />
     </Stack.Navigator>
   );

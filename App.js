@@ -25,4 +25,4 @@ const App: () => React$Node = () => {
   );
 };
 
-export default withAuthenticator(App, {includeGreetings: true});
+export default withAuthenticator(App);
