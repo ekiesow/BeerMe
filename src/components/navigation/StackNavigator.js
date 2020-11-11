@@ -7,6 +7,7 @@ import Home from '../../screens/HomeScreen';
 import Orders from '../../screens/OrdersScreen';
 import Settings from '../../screens/SettingsScreen';
 import Profile from '../../screens/ProfileScreen';
+import Admin from '../../screens/AdminScreen';
 
 const Stack = createStackNavigator();
 
@@ -74,7 +75,16 @@ const SettingsStackNavigator = () => {
   );
 };
 
+const AdminStackNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={screenOptionStyle}>
+      <Stack.Screen name="Admin" component={Admin} />
+    </Stack.Navigator>
+  );
+};
+
 export {
+  AdminStackNavigator,
   HomeStackNavigator,
   OrdersStackNavigator,
   ProfileStackNavigator,
