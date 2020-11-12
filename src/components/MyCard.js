@@ -1,8 +1,6 @@
 import React from 'react';
 import {Button, Card, Paragraph} from 'react-native-paper';
-import {Dimensions, StyleSheet} from 'react-native';
-
-const {width, height} = Dimensions.get('window');
+import {StyleSheet} from 'react-native';
 
 const MyCard = (props) => (
   <Card style={props.style}>
