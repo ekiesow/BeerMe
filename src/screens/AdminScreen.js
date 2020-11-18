@@ -11,7 +11,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 
 const AdminScreen = () => {
   const [imageResponse, setImageResponse] = useState(null);
-  const [s3file, sets3File] = useState({});
+  const [s3file, setS3File] = useState(null);
 
   const {control, errors, handleSubmit} = useForm({
     defaultValues: {
@@ -36,16 +36,16 @@ const AdminScreen = () => {
   console.log('errors', errors);
 
   const onSubmit = async (data) => {
-    console.log(data);
-
-    // upload the submitted image to S3 and create file object
-    if (imageResponse) uploadToStorage();
+    console.log('data: ', data);
+    console.log('s3file: ', s3file);
 
     // create the input for the createDrink mutation
     const input = {
       ...data,
-      ...s3file,
+      file: s3file,
     };
+
+    console.log('input: ', input);
 
     try {
       await API.graphql({
@@ -74,44 +74,30 @@ const AdminScreen = () => {
         console.log('path: ', response.path);
         console.log('uri: ', response.uri);
         setImageResponse(response);
+        // upload the submitted image to S3 and create file object
+        uploadToStorage(response);
       }
     });
   };
 
-  function urlToBlob(url) {
-    return new Promise((resolve, reject) => {
-      var xhr = new XMLHttpRequest();
-      xhr.onerror = reject;
-      xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4) {
-          resolve(xhr.response);
-        }
-      };
-      xhr.open('GET', url);
-      xhr.responseType = 'blob'; // convert type
-      xhr.send();
-    });
-  }
-
-  const uploadToStorage = async () => {
+  const uploadToStorage = async (imageResponse) => {
     try {
-      // const response = await fetch(imageResponse.uri);
+      const response = await fetch(imageResponse.uri);
+      const blob = await response.blob();
 
-      // const blob = await response.blob();
-      const blobData = urlToBlob(imageResponse.uri);
-
-      Storage.put(imageResponse.fileName, blobData, {
+      await Storage.put(imageResponse.fileName, blob, {
         contentType: 'image/jpeg',
       }).then((result) => {
-        console.log('key: ', result);
+        console.log('key: ', result.key);
 
         // create file object to store in DB
         const file = {
           bucket: awsExports.aws_user_files_s3_bucket,
           region: awsExports.aws_user_files_s3_bucket_region,
-          key: 'public/' + imageResponse.fileName,
+          key: 'public/' + result.key,
         };
-        sets3File(file);
+        console.log('file: ', file);
+        setS3File(file);
       });
     } catch (err) {
       console.log('S3 put error: ', err);
