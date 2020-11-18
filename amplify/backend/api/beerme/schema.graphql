@@ -16,27 +16,13 @@ type Drink
   breweryLocation: String
   description: String
   price: Int!
-  image: Image @connection # one-to-one connection: Drink "has one" Image
+  file: S3Object
 }
 
 type S3Object {
   bucket: String!
   region: String!
   key: String!
-}
-
-type Image
-  @model
-  @auth(
-    rules: [
-      {allow: private, operations: [read]} # must have API key configured in aws-exports.js
-      {allow: groups, groups: ["Admin"]} # Admin users can access any operation
-    ]
-  ) {
-  id: ID!
-  name: String
-  # owner: String
-  file: S3Object
 }
 
 type Customer
