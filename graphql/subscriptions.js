@@ -13,11 +13,10 @@ export const onCreateDrink = /* GraphQL */ `
       breweryLocation
       description
       price
-      image {
-        id
-        name
-        createdAt
-        updatedAt
+      file {
+        bucket
+        region
+        key
       }
       updatedAt
     }
@@ -35,11 +34,10 @@ export const onUpdateDrink = /* GraphQL */ `
       breweryLocation
       description
       price
-      image {
-        id
-        name
-        createdAt
-        updatedAt
+      file {
+        bucket
+        region
+        key
       }
       updatedAt
     }
@@ -57,57 +55,11 @@ export const onDeleteDrink = /* GraphQL */ `
       breweryLocation
       description
       price
-      image {
-        id
-        name
-        createdAt
-        updatedAt
-      }
-      updatedAt
-    }
-  }
-`;
-export const onCreateImage = /* GraphQL */ `
-  subscription OnCreateImage {
-    onCreateImage {
-      id
-      name
       file {
         bucket
         region
         key
       }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateImage = /* GraphQL */ `
-  subscription OnUpdateImage {
-    onUpdateImage {
-      id
-      name
-      file {
-        bucket
-        region
-        key
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteImage = /* GraphQL */ `
-  subscription OnDeleteImage {
-    onDeleteImage {
-      id
-      name
-      file {
-        bucket
-        region
-        key
-      }
-      createdAt
       updatedAt
     }
   }

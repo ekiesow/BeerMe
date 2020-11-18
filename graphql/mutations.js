@@ -16,11 +16,10 @@ export const createDrink = /* GraphQL */ `
       breweryLocation
       description
       price
-      image {
-        id
-        name
-        createdAt
-        updatedAt
+      file {
+        bucket
+        region
+        key
       }
       updatedAt
     }
@@ -41,11 +40,10 @@ export const updateDrink = /* GraphQL */ `
       breweryLocation
       description
       price
-      image {
-        id
-        name
-        createdAt
-        updatedAt
+      file {
+        bucket
+        region
+        key
       }
       updatedAt
     }
@@ -66,66 +64,11 @@ export const deleteDrink = /* GraphQL */ `
       breweryLocation
       description
       price
-      image {
-        id
-        name
-        createdAt
-        updatedAt
-      }
-      updatedAt
-    }
-  }
-`;
-export const createImage = /* GraphQL */ `
-  mutation CreateImage(
-    $input: CreateImageInput!
-    $condition: ModelImageConditionInput
-  ) {
-    createImage(input: $input, condition: $condition) {
-      id
-      name
       file {
         bucket
         region
         key
       }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateImage = /* GraphQL */ `
-  mutation UpdateImage(
-    $input: UpdateImageInput!
-    $condition: ModelImageConditionInput
-  ) {
-    updateImage(input: $input, condition: $condition) {
-      id
-      name
-      file {
-        bucket
-        region
-        key
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteImage = /* GraphQL */ `
-  mutation DeleteImage(
-    $input: DeleteImageInput!
-    $condition: ModelImageConditionInput
-  ) {
-    deleteImage(input: $input, condition: $condition) {
-      id
-      name
-      file {
-        bucket
-        region
-        key
-      }
-      createdAt
       updatedAt
     }
   }

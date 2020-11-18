@@ -13,11 +13,10 @@ export const getDrink = /* GraphQL */ `
       breweryLocation
       description
       price
-      image {
-        id
-        name
-        createdAt
-        updatedAt
+      file {
+        bucket
+        region
+        key
       }
       updatedAt
     }
@@ -40,38 +39,6 @@ export const listDrinks = /* GraphQL */ `
         breweryLocation
         description
         price
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getImage = /* GraphQL */ `
-  query GetImage($id: ID!) {
-    getImage(id: $id) {
-      id
-      name
-      file {
-        bucket
-        region
-        key
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listImages = /* GraphQL */ `
-  query ListImages(
-    $filter: ModelImageFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listImages(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        createdAt
         updatedAt
       }
       nextToken
