@@ -21,7 +21,7 @@ const AdminScreen = () => {
       description: '',
       drinkName: '',
       drinkStyle: '',
-      price: 0,
+      price: '',
     },
   });
 
@@ -78,13 +78,29 @@ const AdminScreen = () => {
     });
   };
 
+  function urlToBlob(url) {
+    return new Promise((resolve, reject) => {
+      var xhr = new XMLHttpRequest();
+      xhr.onerror = reject;
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+          resolve(xhr.response);
+        }
+      };
+      xhr.open('GET', url);
+      xhr.responseType = 'blob'; // convert type
+      xhr.send();
+    });
+  }
+
   const uploadToStorage = async () => {
     try {
-      const response = await fetch(imageResponse.uri);
+      // const response = await fetch(imageResponse.uri);
 
-      const blob = await response.blob();
+      // const blob = await response.blob();
+      const blobData = urlToBlob(imageResponse.uri);
 
-      Storage.put(imageResponse.fileName, blob, {
+      Storage.put(imageResponse.fileName, blobData, {
         contentType: 'image/jpeg',
       }).then((result) => {
         console.log('key: ', result);
@@ -287,6 +303,11 @@ const AdminScreen = () => {
             mode="contained"
             onPress={handleSubmit(onSubmit)}>
             Submit
+          </Button>
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button value="Submit" mode="contained" onPress={uploadToStorage}>
+            Submit Photo
           </Button>
         </View>
       </View>
