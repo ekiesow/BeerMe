@@ -19,6 +19,7 @@ const initialState = [{drinkName: '', breweryName: '', description: ''}];
 const DrinkCarousel = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   const [drinks, setDrinks] = useState(initialState);
+  // setDrinks({drinks.filter(drink => drink.drinkStyle === 'IPA'), ...drinks}); // TODO filter drinks by style
 
   useEffect(() => {
     fetchDrinks();
