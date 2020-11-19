@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {View, Image, StyleSheet, SafeAreaView} from 'react-native';
 import {API, Storage} from 'aws-amplify';
 import {useForm, Controller} from 'react-hook-form';
@@ -43,6 +43,7 @@ const AdminScreen = () => {
     const input = {
       ...data,
       file: s3file,
+      fileKey: s3file.key,
     };
 
     console.log('input: ', input);
@@ -73,6 +74,7 @@ const AdminScreen = () => {
         console.log('fileName: ', response.path);
         console.log('path: ', response.path);
         console.log('uri: ', response.uri);
+        console.log('mime: ', response.type);
         setImageResponse(response);
         // upload the submitted image to S3 and create file object
         uploadToStorage(response);
@@ -86,7 +88,7 @@ const AdminScreen = () => {
       const blob = await response.blob();
 
       await Storage.put(imageResponse.fileName, blob, {
-        contentType: 'image/jpeg',
+        contentType: imageResponse.type,
       }).then((result) => {
         console.log('key: ', result.key);
 
