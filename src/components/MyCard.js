@@ -5,17 +5,15 @@ import awsExports from '../../aws-exports';
 
 const MyCard = (props) => {
   const drink = props.data;
-  const url = drink.url;
-  // const BUCKET_NAME = awsExports.aws_user_files_s3_bucket;
-  // const BUCKET_REGION = awsExports.aws_user_files_s3_bucket_region;
-  // const url =
-  //   'https://' +
-  //   BUCKET_NAME +
-  //   '.s3-' +
-  //   BUCKET_REGION +
-  //   '.amazonaws.com/' +
-  //   drink.fileKey;
-  // console.log('url: ', url);
+  const BUCKET_NAME = awsExports.aws_user_files_s3_bucket;
+  const BUCKET_REGION = awsExports.aws_user_files_s3_bucket_region;
+  const url =
+    'https://' +
+    BUCKET_NAME +
+    '.s3-' +
+    BUCKET_REGION +
+    '.amazonaws.com/' +
+    drink.fileKey;
 
   return (
     <>

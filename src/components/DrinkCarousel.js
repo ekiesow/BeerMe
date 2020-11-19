@@ -26,7 +26,6 @@ const initialState = [
     price: '',
     file: {bucket: '', region: '', key: ''},
     fileKey: '',
-    url: '',
   },
 ];
 
@@ -94,39 +93,9 @@ const DrinkCarousel = () => {
         authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       const drinkItems = drinkData.data.searchDrinks.items;
-      fetchUrls(drinkItems);
-      // setDrinks(drinks);
+      setDrinks(drinkItems);
     } catch (err) {
       console.log('error fetching drinks', err);
-    }
-  }
-
-  function fetchUrls(drinkItems) {
-    drinkItems.forEach(async (drink) => {
-      const url = await getUrl(drink.fileKey);
-      const updatedDrink = {
-        ...drink,
-        url: url,
-      }; // drink with added url field
-      // console.log('updatedDrink', updatedDrink);
-      const index = drinkItems.findIndex(
-        (drink) => drink.id === updatedDrink.id,
-      );
-      const updatedDrinks = [
-        ...drinks.slice(0, index),
-        updatedDrink,
-        ...drinks.slice(index + 1),
-      ];
-      setDrinks(updatedDrinks);
-    });
-  }
-
-  async function getUrl(key) {
-    try {
-      const url = await Storage.get(key);
-      return url;
-    } catch (err) {
-      console.log('Error getting url: ', err);
     }
   }
 
