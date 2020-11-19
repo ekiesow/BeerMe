@@ -17,6 +17,7 @@ type Drink
   description: String
   price: Int!
   file: S3Object
+  fileKey: String
 }
 
 type S3Object {

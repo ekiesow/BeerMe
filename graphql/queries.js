@@ -18,6 +18,7 @@ export const getDrink = /* GraphQL */ `
         region
         key
       }
+      fileKey
       updatedAt
     }
   }
@@ -39,6 +40,7 @@ export const listDrinks = /* GraphQL */ `
         breweryLocation
         description
         price
+        fileKey
         updatedAt
       }
       nextToken
@@ -243,6 +245,7 @@ export const getOrderItem = /* GraphQL */ `
         breweryLocation
         description
         price
+        fileKey
         updatedAt
       }
       userId
@@ -339,6 +342,7 @@ export const searchDrinks = /* GraphQL */ `
         breweryLocation
         description
         price
+        fileKey
         updatedAt
       }
       nextToken

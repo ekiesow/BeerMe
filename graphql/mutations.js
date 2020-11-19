@@ -21,6 +21,7 @@ export const createDrink = /* GraphQL */ `
         region
         key
       }
+      fileKey
       updatedAt
     }
   }
@@ -45,6 +46,7 @@ export const updateDrink = /* GraphQL */ `
         region
         key
       }
+      fileKey
       updatedAt
     }
   }
@@ -69,6 +71,7 @@ export const deleteDrink = /* GraphQL */ `
         region
         key
       }
+      fileKey
       updatedAt
     }
   }
@@ -455,6 +458,7 @@ export const createOrderItem = /* GraphQL */ `
         breweryLocation
         description
         price
+        fileKey
         updatedAt
       }
       userId
@@ -495,6 +499,7 @@ export const updateOrderItem = /* GraphQL */ `
         breweryLocation
         description
         price
+        fileKey
         updatedAt
       }
       userId
@@ -535,6 +540,7 @@ export const deleteOrderItem = /* GraphQL */ `
         breweryLocation
         description
         price
+        fileKey
         updatedAt
       }
       userId
