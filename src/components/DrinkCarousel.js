@@ -1,4 +1,4 @@
-import {API, graphqlOperation} from 'aws-amplify';
+import {API, graphqlOperation, Storage} from 'aws-amplify';
 import React, {useEffect, useState} from 'react';
 import {View, Dimensions, StyleSheet} from 'react-native';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
@@ -14,7 +14,20 @@ const {width: screenWidth} = Dimensions.get('window');
 const ITEM_WIDTH = screenWidth - 60;
 const ITEM_HEIGHT = screenWidth - 60;
 
-const initialState = [{drinkName: '', breweryName: '', description: ''}];
+const initialState = [
+  {
+    id: '',
+    drinkName: '',
+    drinkStyle: '',
+    abv: '',
+    breweryName: '',
+    breweryLocation: '',
+    description: '',
+    price: '',
+    file: {bucket: '', region: '', key: ''},
+    fileKey: '',
+  },
+];
 
 const DrinkCarousel = () => {
   const [activeSlide, setActiveSlide] = useState(0);

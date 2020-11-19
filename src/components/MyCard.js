@@ -1,26 +1,26 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Button, Card, Paragraph} from 'react-native-paper';
 import {StyleSheet} from 'react-native';
-import {S3Image} from 'aws-amplify-react-native';
+import awsExports from '../../aws-exports';
 
 const MyCard = (props) => {
-  const [url, setUrl] = useState(null);
+  const drink = props.data;
+  const BUCKET_NAME = awsExports.aws_user_files_s3_bucket;
+  const BUCKET_REGION = awsExports.aws_user_files_s3_bucket_region;
+  const url =
+    'https://' +
+    BUCKET_NAME +
+    '.s3-' +
+    BUCKET_REGION +
+    '.amazonaws.com/' +
+    drink.fileKey;
+  console.log('url: ', url);
 
   return (
     <>
-      {props.data.file && (
-        <S3Image
-          hidden
-          imgKey={props.data.file.key}
-          onLoad={(url) => {
-            console.log(url);
-            setUrl(url);
-          }}
-        />
-      )}
       <Card style={props.style}>
         {url ? (
-          <Card.Cover source={{uri: {url}}} style={styles.cardCover} />
+          <Card.Cover source={{uri: url}} style={styles.cardCover} />
         ) : (
           <Card.Cover
             source={{uri: 'https://picsum.photos/700'}}
@@ -28,15 +28,15 @@ const MyCard = (props) => {
           />
         )}
         <Card.Title
-          title={props.data.drinkName}
+          title={drink.drinkName}
           subtitle={
-            props.data.breweryName +
+            drink.breweryName +
             ' - ' +
-            props.data.breweryLocation +
+            drink.breweryLocation +
             '\n' +
-            props.data.drinkStyle +
+            drink.drinkStyle +
             ' - ABV: ' +
-            props.data.abv +
+            drink.abv +
             '%'
           }
           subtitleNumberOfLines={2}
@@ -44,8 +44,8 @@ const MyCard = (props) => {
         />
         <Card.Content>
           {/* <Title>{props.title}</Title> */}
-          <Paragraph>{props.data.description}</Paragraph>
-          <Paragraph>Price: ${props.data.price}</Paragraph>
+          <Paragraph>{drink.description}</Paragraph>
+          <Paragraph>Price: ${drink.price}</Paragraph>
         </Card.Content>
         <Card.Actions style={styles.cardActions}>
           <Button>Let's Do It</Button>
