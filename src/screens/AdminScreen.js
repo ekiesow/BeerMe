@@ -293,11 +293,6 @@ const AdminScreen = () => {
             Submit
           </Button>
         </View>
-        <View style={styles.buttonContainer}>
-          <Button value="Submit" mode="contained" onPress={uploadToStorage}>
-            Submit Photo
-          </Button>
-        </View>
       </View>
     </ScrollView>
   );
