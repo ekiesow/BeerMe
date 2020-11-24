@@ -102,7 +102,7 @@ const DrinkCarousel = () => {
   const renderItem = ({item, index}) => {
     return (
       <View style={styles.container}>
-        <MyCard key={index} data={item} style={styles.card} />
+        <MyCard key={index} data={item} />
       </View>
     );
   };
@@ -146,11 +146,6 @@ const DrinkCarousel = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-  },
-  card: {
-    width: ITEM_WIDTH,
-    height: ITEM_HEIGHT,
     justifyContent: 'center',
   },
 });

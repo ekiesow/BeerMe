@@ -17,7 +17,7 @@ const MyCard = (props) => {
 
   return (
     <>
-      <Card style={props.style}>
+      <Card>
         {url ? (
           <Card.Cover source={{uri: url}} style={styles.cardCover} />
         ) : (
@@ -42,12 +42,11 @@ const MyCard = (props) => {
           subtitleStyle={styles.subtitleStyle}
         />
         <Card.Content>
-          {/* <Title>{props.title}</Title> */}
           <Paragraph>{drink.description}</Paragraph>
           <Paragraph>Price: ${drink.price}</Paragraph>
         </Card.Content>
         <Card.Actions style={styles.cardActions}>
-          <Button>Let's Do It</Button>
+          <Button mode="outlined">Let's Do It</Button>
         </Card.Actions>
       </Card>
     </>
