@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import {View, Image, StyleSheet, SafeAreaView} from 'react-native';
+import {View, Image, StyleSheet} from 'react-native';
 import {API, Storage} from 'aws-amplify';
 import {useForm, Controller} from 'react-hook-form';
 import ImagePicker from 'react-native-image-picker';
@@ -9,20 +9,22 @@ import {createDrink} from '../../graphql/mutations';
 import {Button, TextInput} from 'react-native-paper';
 import {ScrollView} from 'react-native-gesture-handler';
 
+const defaultData = {
+  abv: '',
+  breweryLocation: '',
+  breweryName: '',
+  description: '',
+  drinkName: '',
+  drinkStyle: '',
+  price: '',
+};
+
 const AdminScreen = () => {
   const [imageResponse, setImageResponse] = useState(null);
   const [s3file, setS3File] = useState(null);
 
-  const {control, errors, handleSubmit} = useForm({
-    defaultValues: {
-      abv: '',
-      breweryLocation: '',
-      breweryName: '',
-      description: '',
-      drinkName: '',
-      drinkStyle: '',
-      price: '',
-    },
+  const {control, errors, handleSubmit, reset} = useForm({
+    defaultValues: defaultData,
   });
 
   const abvRef = useRef();
@@ -54,6 +56,8 @@ const AdminScreen = () => {
         variables: {input: input},
         authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
+      // reset the form
+      reset(defaultData);
     } catch (err) {
       console.log('Error creating drink: ', err);
     }
