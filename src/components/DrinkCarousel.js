@@ -2,7 +2,7 @@ import {API, graphqlOperation, Storage} from 'aws-amplify';
 import React, {useEffect, useState} from 'react';
 import {View, Dimensions, StyleSheet} from 'react-native';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
-import {searchDrinks} from '../../graphql/queries';
+import {listDrinks} from '../../graphql/queries';
 import {
   onCreateDrink,
   onDeleteDrink,
@@ -88,11 +88,10 @@ const DrinkCarousel = () => {
   async function fetchDrinks() {
     try {
       const drinkData = await API.graphql({
-        query: searchDrinks,
-        sort: {field: 'createdAt', direction: 'desc'},
+        query: listDrinks,
         authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
-      const drinkItems = drinkData.data.searchDrinks.items;
+      const drinkItems = drinkData.data.listDrinks.items;
       setDrinks(drinkItems);
     } catch (err) {
       console.log('error fetching drinks', err);
