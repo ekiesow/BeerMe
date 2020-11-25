@@ -17,5 +17,25 @@
         "userPoolGroups": {}
       }
     }
+  },
+  "demo": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-beerme-demo-173850-authRole",
+      "UnauthRoleArn": "arn:aws:iam::226708847740:role/amplify-beerme-demo-173850-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::226708847740:role/amplify-beerme-demo-173850-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-beerme-demo-173850-deployment",
+      "UnauthRoleName": "amplify-beerme-demo-173850-unauthRole",
+      "StackName": "amplify-beerme-demo-173850",
+      "StackId": "arn:aws:cloudformation:us-west-2:226708847740:stack/amplify-beerme-demo-173850/f9f72640-2ebe-11eb-a1a0-0a648226af98",
+      "AmplifyAppId": "d1sodtpb8bedju"
+    },
+    "categories": {
+      "auth": {
+        "beermea09a67d7": {},
+        "userPoolGroups": {},
+        "beermeb03c6b69": {}
+      }
+    }
   }
 }

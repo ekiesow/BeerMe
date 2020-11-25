@@ -1,6 +1,59 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const deleteCustomer = /* GraphQL */ `
+  mutation DeleteCustomer(
+    $input: DeleteCustomerInput!
+    $condition: ModelCustomerConditionInput
+  ) {
+    deleteCustomer(input: $input, condition: $condition) {
+      id
+      userId
+      username
+      email
+      firstName
+      lastName
+      phoneNumber
+      address {
+        id
+        userId
+        firstName
+        lastName
+        address1
+        address2
+        city
+        state
+        postalCode
+        createdAt
+        updatedAt
+        owner
+      }
+      shippingAddress {
+        id
+        userId
+        firstName
+        lastName
+        address1
+        address2
+        city
+        state
+        postalCode
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+      ordersByDate {
+        nextToken
+      }
+      ordersByStatusByDate {
+        nextToken
+      }
+    }
+  }
+`;
 export const createDrink = /* GraphQL */ `
   mutation CreateDrink(
     $input: CreateDrinkInput!
@@ -117,15 +170,15 @@ export const createCustomer = /* GraphQL */ `
         updatedAt
         owner
       }
+      createdAt
+      updatedAt
+      owner
       ordersByDate {
         nextToken
       }
       ordersByStatusByDate {
         nextToken
       }
-      createdAt
-      updatedAt
-      owner
     }
   }
 `;
@@ -170,68 +223,15 @@ export const updateCustomer = /* GraphQL */ `
         updatedAt
         owner
       }
+      createdAt
+      updatedAt
+      owner
       ordersByDate {
         nextToken
       }
       ordersByStatusByDate {
         nextToken
       }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const deleteCustomer = /* GraphQL */ `
-  mutation DeleteCustomer(
-    $input: DeleteCustomerInput!
-    $condition: ModelCustomerConditionInput
-  ) {
-    deleteCustomer(input: $input, condition: $condition) {
-      id
-      userId
-      username
-      email
-      firstName
-      lastName
-      phoneNumber
-      address {
-        id
-        userId
-        firstName
-        lastName
-        address1
-        address2
-        city
-        state
-        postalCode
-        createdAt
-        updatedAt
-        owner
-      }
-      shippingAddress {
-        id
-        userId
-        firstName
-        lastName
-        address1
-        address2
-        city
-        state
-        postalCode
-        createdAt
-        updatedAt
-        owner
-      }
-      ordersByDate {
-        nextToken
-      }
-      ordersByStatusByDate {
-        nextToken
-      }
-      createdAt
-      updatedAt
-      owner
     }
   }
 `;
@@ -311,18 +311,6 @@ export const createOrder = /* GraphQL */ `
       createdAt
       amount
       status
-      customer {
-        id
-        userId
-        username
-        email
-        firstName
-        lastName
-        phoneNumber
-        createdAt
-        updatedAt
-        owner
-      }
       shippingAddress {
         id
         userId
@@ -337,11 +325,23 @@ export const createOrder = /* GraphQL */ `
         updatedAt
         owner
       }
+      updatedAt
+      customer {
+        id
+        userId
+        username
+        email
+        firstName
+        lastName
+        phoneNumber
+        createdAt
+        updatedAt
+        owner
+      }
+      owner
       orderItems {
         nextToken
       }
-      updatedAt
-      owner
     }
   }
 `;
@@ -358,18 +358,6 @@ export const updateOrder = /* GraphQL */ `
       createdAt
       amount
       status
-      customer {
-        id
-        userId
-        username
-        email
-        firstName
-        lastName
-        phoneNumber
-        createdAt
-        updatedAt
-        owner
-      }
       shippingAddress {
         id
         userId
@@ -384,11 +372,23 @@ export const updateOrder = /* GraphQL */ `
         updatedAt
         owner
       }
+      updatedAt
+      customer {
+        id
+        userId
+        username
+        email
+        firstName
+        lastName
+        phoneNumber
+        createdAt
+        updatedAt
+        owner
+      }
+      owner
       orderItems {
         nextToken
       }
-      updatedAt
-      owner
     }
   }
 `;
@@ -405,18 +405,6 @@ export const deleteOrder = /* GraphQL */ `
       createdAt
       amount
       status
-      customer {
-        id
-        userId
-        username
-        email
-        firstName
-        lastName
-        phoneNumber
-        createdAt
-        updatedAt
-        owner
-      }
       shippingAddress {
         id
         userId
@@ -431,11 +419,23 @@ export const deleteOrder = /* GraphQL */ `
         updatedAt
         owner
       }
+      updatedAt
+      customer {
+        id
+        userId
+        username
+        email
+        firstName
+        lastName
+        phoneNumber
+        createdAt
+        updatedAt
+        owner
+      }
+      owner
       orderItems {
         nextToken
       }
-      updatedAt
-      owner
     }
   }
 `;
@@ -448,6 +448,10 @@ export const createOrderItem = /* GraphQL */ `
       id
       orderId
       drinkId
+      userId
+      quantity
+      createdAt
+      updatedAt
       drink {
         id
         createdAt
@@ -461,8 +465,6 @@ export const createOrderItem = /* GraphQL */ `
         fileKey
         updatedAt
       }
-      userId
-      quantity
       order {
         id
         customerId
@@ -474,8 +476,6 @@ export const createOrderItem = /* GraphQL */ `
         updatedAt
         owner
       }
-      createdAt
-      updatedAt
       owner
     }
   }
@@ -489,6 +489,10 @@ export const updateOrderItem = /* GraphQL */ `
       id
       orderId
       drinkId
+      userId
+      quantity
+      createdAt
+      updatedAt
       drink {
         id
         createdAt
@@ -502,8 +506,6 @@ export const updateOrderItem = /* GraphQL */ `
         fileKey
         updatedAt
       }
-      userId
-      quantity
       order {
         id
         customerId
@@ -515,8 +517,6 @@ export const updateOrderItem = /* GraphQL */ `
         updatedAt
         owner
       }
-      createdAt
-      updatedAt
       owner
     }
   }
@@ -530,6 +530,10 @@ export const deleteOrderItem = /* GraphQL */ `
       id
       orderId
       drinkId
+      userId
+      quantity
+      createdAt
+      updatedAt
       drink {
         id
         createdAt
@@ -543,8 +547,6 @@ export const deleteOrderItem = /* GraphQL */ `
         fileKey
         updatedAt
       }
-      userId
-      quantity
       order {
         id
         customerId
@@ -556,8 +558,6 @@ export const deleteOrderItem = /* GraphQL */ `
         updatedAt
         owner
       }
-      createdAt
-      updatedAt
       owner
     }
   }

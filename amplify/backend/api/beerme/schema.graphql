@@ -1,12 +1,12 @@
 type Drink
   @model
-  @searchable
   @auth(
     rules: [
       {allow: private, operations: [read]} # must have API key configured in aws-exports.js
       {allow: groups, groups: ["Admin"]} # Admin users can access any operation
     ]
-  ) {
+  )
+ @key(fields: ["id", "createdAt"]) {
   id: ID!
   createdAt: AWSDateTime!
   drinkName: String!

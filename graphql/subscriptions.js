@@ -105,15 +105,15 @@ export const onCreateCustomer = /* GraphQL */ `
         updatedAt
         owner
       }
+      createdAt
+      updatedAt
+      owner
       ordersByDate {
         nextToken
       }
       ordersByStatusByDate {
         nextToken
       }
-      createdAt
-      updatedAt
-      owner
     }
   }
 `;
@@ -155,15 +155,15 @@ export const onUpdateCustomer = /* GraphQL */ `
         updatedAt
         owner
       }
+      createdAt
+      updatedAt
+      owner
       ordersByDate {
         nextToken
       }
       ordersByStatusByDate {
         nextToken
       }
-      createdAt
-      updatedAt
-      owner
     }
   }
 `;
@@ -205,15 +205,15 @@ export const onDeleteCustomer = /* GraphQL */ `
         updatedAt
         owner
       }
+      createdAt
+      updatedAt
+      owner
       ordersByDate {
         nextToken
       }
       ordersByStatusByDate {
         nextToken
       }
-      createdAt
-      updatedAt
-      owner
     }
   }
 `;
@@ -281,18 +281,6 @@ export const onCreateOrder = /* GraphQL */ `
       createdAt
       amount
       status
-      customer {
-        id
-        userId
-        username
-        email
-        firstName
-        lastName
-        phoneNumber
-        createdAt
-        updatedAt
-        owner
-      }
       shippingAddress {
         id
         userId
@@ -307,11 +295,23 @@ export const onCreateOrder = /* GraphQL */ `
         updatedAt
         owner
       }
+      updatedAt
+      customer {
+        id
+        userId
+        username
+        email
+        firstName
+        lastName
+        phoneNumber
+        createdAt
+        updatedAt
+        owner
+      }
+      owner
       orderItems {
         nextToken
       }
-      updatedAt
-      owner
     }
   }
 `;
@@ -325,18 +325,6 @@ export const onUpdateOrder = /* GraphQL */ `
       createdAt
       amount
       status
-      customer {
-        id
-        userId
-        username
-        email
-        firstName
-        lastName
-        phoneNumber
-        createdAt
-        updatedAt
-        owner
-      }
       shippingAddress {
         id
         userId
@@ -351,11 +339,23 @@ export const onUpdateOrder = /* GraphQL */ `
         updatedAt
         owner
       }
+      updatedAt
+      customer {
+        id
+        userId
+        username
+        email
+        firstName
+        lastName
+        phoneNumber
+        createdAt
+        updatedAt
+        owner
+      }
+      owner
       orderItems {
         nextToken
       }
-      updatedAt
-      owner
     }
   }
 `;
@@ -369,18 +369,6 @@ export const onDeleteOrder = /* GraphQL */ `
       createdAt
       amount
       status
-      customer {
-        id
-        userId
-        username
-        email
-        firstName
-        lastName
-        phoneNumber
-        createdAt
-        updatedAt
-        owner
-      }
       shippingAddress {
         id
         userId
@@ -395,11 +383,23 @@ export const onDeleteOrder = /* GraphQL */ `
         updatedAt
         owner
       }
+      updatedAt
+      customer {
+        id
+        userId
+        username
+        email
+        firstName
+        lastName
+        phoneNumber
+        createdAt
+        updatedAt
+        owner
+      }
+      owner
       orderItems {
         nextToken
       }
-      updatedAt
-      owner
     }
   }
 `;
@@ -409,6 +409,10 @@ export const onCreateOrderItem = /* GraphQL */ `
       id
       orderId
       drinkId
+      userId
+      quantity
+      createdAt
+      updatedAt
       drink {
         id
         createdAt
@@ -422,8 +426,6 @@ export const onCreateOrderItem = /* GraphQL */ `
         fileKey
         updatedAt
       }
-      userId
-      quantity
       order {
         id
         customerId
@@ -435,8 +437,6 @@ export const onCreateOrderItem = /* GraphQL */ `
         updatedAt
         owner
       }
-      createdAt
-      updatedAt
       owner
     }
   }
@@ -447,6 +447,10 @@ export const onUpdateOrderItem = /* GraphQL */ `
       id
       orderId
       drinkId
+      userId
+      quantity
+      createdAt
+      updatedAt
       drink {
         id
         createdAt
@@ -460,8 +464,6 @@ export const onUpdateOrderItem = /* GraphQL */ `
         fileKey
         updatedAt
       }
-      userId
-      quantity
       order {
         id
         customerId
@@ -473,8 +475,6 @@ export const onUpdateOrderItem = /* GraphQL */ `
         updatedAt
         owner
       }
-      createdAt
-      updatedAt
       owner
     }
   }
@@ -485,6 +485,10 @@ export const onDeleteOrderItem = /* GraphQL */ `
       id
       orderId
       drinkId
+      userId
+      quantity
+      createdAt
+      updatedAt
       drink {
         id
         createdAt
@@ -498,8 +502,6 @@ export const onDeleteOrderItem = /* GraphQL */ `
         fileKey
         updatedAt
       }
-      userId
-      quantity
       order {
         id
         customerId
@@ -511,8 +513,6 @@ export const onDeleteOrderItem = /* GraphQL */ `
         updatedAt
         owner
       }
-      createdAt
-      updatedAt
       owner
     }
   }

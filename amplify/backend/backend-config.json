@@ -1,6 +1,6 @@
 {
   "auth": {
-    "beermea09a67d7": {
+    "beermeb03c6b69": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -12,7 +12,7 @@
       "dependsOn": [
         {
           "category": "auth",
-          "resourceName": "beermea09a67d7",
+          "resourceName": "beermeb03c6b69",
           "attributes": [
             "UserPoolId",
             "AppClientIDWeb",
@@ -23,6 +23,12 @@
       ]
     }
   },
+  "storage": {
+    "s35585707b": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
+  },
   "api": {
     "beerme": {
       "service": "AppSync",
@@ -30,44 +36,22 @@
       "output": {
         "authConfig": {
           "defaultAuthentication": {
-            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-            "userPoolConfig": {
-              "userPoolId": "authbeermea09a67d7"
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7,
+              "description": ""
             }
           },
           "additionalAuthenticationProviders": [
             {
-              "authenticationType": "API_KEY",
-              "apiKeyConfig": {
-                "apiKeyExpirationDays": 7,
-                "description": "dev"
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authbeermeb03c6b69"
               }
             }
           ]
         }
       }
-    }
-  },
-  "storage": {
-    "beermeimage": {
-      "service": "S3",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "beermea09a67d7",
-          "attributes": [
-            "UserPoolId"
-          ]
-        },
-        {
-          "category": "auth",
-          "resourceName": "userPoolGroups",
-          "attributes": [
-            "AdminGroupRole"
-          ]
-        }
-      ]
     }
   }
 }

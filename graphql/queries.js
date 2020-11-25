@@ -1,9 +1,43 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const listDrinks = /* GraphQL */ `
+  query ListDrinks(
+    $id: ID
+    $createdAt: ModelStringKeyConditionInput
+    $filter: ModelDrinkFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listDrinks(
+      id: $id
+      createdAt: $createdAt
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        id
+        createdAt
+        drinkName
+        drinkStyle
+        abv
+        breweryName
+        breweryLocation
+        description
+        price
+        fileKey
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getDrink = /* GraphQL */ `
-  query GetDrink($id: ID!) {
-    getDrink(id: $id) {
+  query GetDrink($id: ID!, $createdAt: AWSDateTime!) {
+    getDrink(id: $id, createdAt: $createdAt) {
       id
       createdAt
       drinkName
@@ -23,25 +57,24 @@ export const getDrink = /* GraphQL */ `
     }
   }
 `;
-export const listDrinks = /* GraphQL */ `
-  query ListDrinks(
-    $filter: ModelDrinkFilterInput
+export const listCustomers = /* GraphQL */ `
+  query ListCustomers(
+    $filter: ModelCustomerFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listDrinks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listCustomers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        userId
+        username
+        email
+        firstName
+        lastName
+        phoneNumber
         createdAt
-        drinkName
-        drinkStyle
-        abv
-        breweryName
-        breweryLocation
-        description
-        price
-        fileKey
         updatedAt
+        owner
       }
       nextToken
     }
@@ -85,38 +118,15 @@ export const getCustomer = /* GraphQL */ `
         updatedAt
         owner
       }
+      createdAt
+      updatedAt
+      owner
       ordersByDate {
         nextToken
       }
       ordersByStatusByDate {
         nextToken
       }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const listCustomers = /* GraphQL */ `
-  query ListCustomers(
-    $filter: ModelCustomerFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listCustomers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        userId
-        username
-        email
-        firstName
-        lastName
-        phoneNumber
-        createdAt
-        updatedAt
-        owner
-      }
-      nextToken
     }
   }
 `;
@@ -163,50 +173,6 @@ export const listAddresss = /* GraphQL */ `
     }
   }
 `;
-export const getOrder = /* GraphQL */ `
-  query GetOrder($id: ID!) {
-    getOrder(id: $id) {
-      id
-      customerId
-      userId
-      customerEmail
-      createdAt
-      amount
-      status
-      customer {
-        id
-        userId
-        username
-        email
-        firstName
-        lastName
-        phoneNumber
-        createdAt
-        updatedAt
-        owner
-      }
-      shippingAddress {
-        id
-        userId
-        firstName
-        lastName
-        address1
-        address2
-        city
-        state
-        postalCode
-        createdAt
-        updatedAt
-        owner
-      }
-      orderItems {
-        nextToken
-      }
-      updatedAt
-      owner
-    }
-  }
-`;
 export const listOrders = /* GraphQL */ `
   query ListOrders(
     $filter: ModelOrderFilterInput
@@ -229,12 +195,60 @@ export const listOrders = /* GraphQL */ `
     }
   }
 `;
+export const getOrder = /* GraphQL */ `
+  query GetOrder($id: ID!) {
+    getOrder(id: $id) {
+      id
+      customerId
+      userId
+      customerEmail
+      createdAt
+      amount
+      status
+      shippingAddress {
+        id
+        userId
+        firstName
+        lastName
+        address1
+        address2
+        city
+        state
+        postalCode
+        createdAt
+        updatedAt
+        owner
+      }
+      updatedAt
+      customer {
+        id
+        userId
+        username
+        email
+        firstName
+        lastName
+        phoneNumber
+        createdAt
+        updatedAt
+        owner
+      }
+      owner
+      orderItems {
+        nextToken
+      }
+    }
+  }
+`;
 export const getOrderItem = /* GraphQL */ `
   query GetOrderItem($id: ID!) {
     getOrderItem(id: $id) {
       id
       orderId
       drinkId
+      userId
+      quantity
+      createdAt
+      updatedAt
       drink {
         id
         createdAt
@@ -248,8 +262,6 @@ export const getOrderItem = /* GraphQL */ `
         fileKey
         updatedAt
       }
-      userId
-      quantity
       order {
         id
         customerId
@@ -261,8 +273,6 @@ export const getOrderItem = /* GraphQL */ `
         updatedAt
         owner
       }
-      createdAt
-      updatedAt
       owner
     }
   }
@@ -314,39 +324,6 @@ export const orderItemByOrderId = /* GraphQL */ `
         owner
       }
       nextToken
-    }
-  }
-`;
-export const searchDrinks = /* GraphQL */ `
-  query SearchDrinks(
-    $filter: SearchableDrinkFilterInput
-    $sort: SearchableDrinkSortInput
-    $limit: Int
-    $nextToken: String
-    $from: Int
-  ) {
-    searchDrinks(
-      filter: $filter
-      sort: $sort
-      limit: $limit
-      nextToken: $nextToken
-      from: $from
-    ) {
-      items {
-        id
-        createdAt
-        drinkName
-        drinkStyle
-        abv
-        breweryName
-        breweryLocation
-        description
-        price
-        fileKey
-        updatedAt
-      }
-      nextToken
-      total
     }
   }
 `;
