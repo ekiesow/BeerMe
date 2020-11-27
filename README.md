@@ -17,7 +17,7 @@ Make sure the boxes next to all of the following items are checked:
 - Android Virtual Device
 
 ##### 2. Install the Android SDK. React Native requires the Android 10 (Q) SDK.
-Appearance & Behavior → System Settings → Android SDK
+Appearance & Behavior → System Settings → Android SDK<br>
 Look for and expand the Android 10 (Q) entry, then make sure the following items are checked:
 
 - Android SDK Platform 29
