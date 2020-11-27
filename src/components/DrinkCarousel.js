@@ -41,10 +41,7 @@ const DrinkCarousel = (props) => {
       query: onCreateDrink,
       authMode: 'AMAZON_COGNITO_USER_POOLS',
     }).subscribe({
-      next: (drinkData) => {
-        // const newDrink = drinkData.value.data.onCreateDrink; // newly created drink
-        // const updatedDrinks = [newDrink, ...drinks];
-        // setDrinks(updatedDrinks);
+      next: () => {
         fetchDrinks();
       },
     });
@@ -53,15 +50,7 @@ const DrinkCarousel = (props) => {
       query: onUpdateDrink,
       authMode: 'AMAZON_COGNITO_USER_POOLS',
     }).subscribe({
-      next: (drinkData) => {
-        // const updatedDrink = drinkData.value.data.onUpdateDrink; // newly updated drink
-        // const index = drinks.findIndex((drink) => drink.id === updatedDrink.id);
-        // const updatedDrinks = [
-        //   ...drinks.slice(0, index),
-        //   updatedDrink,
-        //   ...drinks.slice(index + 1),
-        // ];
-        // setDrinks(updatedDrinks);
+      next: () => {
         fetchDrinks();
       },
     });
@@ -70,12 +59,7 @@ const DrinkCarousel = (props) => {
       query: onDeleteDrink,
       authMode: 'AMAZON_COGNITO_USER_POOLS',
     }).subscribe({
-      next: (drinkData) => {
-        // const deletedDrink = drinkData.value.data.onDeleteDrink; // newly deleted drink
-        // const updatedDrinks = drinks.filter(
-        //   (drink) => drink.id !== deletedDrink.id,
-        // );
-        // setDrinks(updatedDrinks);
+      next: () => {
         fetchDrinks();
       },
     });
