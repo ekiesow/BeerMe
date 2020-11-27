@@ -50,7 +50,7 @@ const MyCard = (props) => {
         <Card.Actions style={styles.cardActions}>
           {props.admin ? (
             <>
-              <UpdateDrink data={drink} />
+              <UpdateDrink data={drink} nav={props.nav} />
               <DeleteDrink data={drink} />
             </>
           ) : (

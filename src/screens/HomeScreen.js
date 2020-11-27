@@ -5,7 +5,7 @@ import {Auth} from 'aws-amplify';
 import _ from 'lodash';
 // import SplashScreen from 'react-native-splash-screen' // TODO look into splash screen when loading drinks from graphql see example: https://github.com/sarthakpranesh/Covid19/blob/master/src/screens/HomeScreen.tsx
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const [admin, setAdmin] = useState(false);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const HomeScreen = () => {
   return (
     <>
       <View style={styles.container}>
-        <DrinkCarousel admin={admin} />
+        <DrinkCarousel admin={admin} nav={navigation} />
       </View>
     </>
   );

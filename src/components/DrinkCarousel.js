@@ -103,7 +103,7 @@ const DrinkCarousel = (props) => {
   const renderItem = ({item, index}) => {
     return (
       <View style={styles.container}>
-        <MyCard key={index} data={item} admin={props.admin} />
+        <MyCard key={index} data={item} admin={props.admin} nav={props.nav} />
       </View>
     );
   };

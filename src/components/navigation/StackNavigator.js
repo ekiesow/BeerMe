@@ -8,6 +8,7 @@ import Orders from '../../screens/OrdersScreen';
 import Settings from '../../screens/SettingsScreen';
 import Profile from '../../screens/ProfileScreen';
 import Admin from '../../screens/AdminScreen';
+import Update from '../../screens/UpdateScreen';
 
 const Stack = createStackNavigator();
 
@@ -23,7 +24,7 @@ const HomeStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="Home" component={Home} />
-      {/* <HomeStack.Screen name="Settings" component={SettingsScreen} /> */}
+      <Stack.Screen name="Update Drink" component={Update} />
     </Stack.Navigator>
   );
 };
