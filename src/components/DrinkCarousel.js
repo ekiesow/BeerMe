@@ -1,4 +1,4 @@
-import {API, graphqlOperation, Storage} from 'aws-amplify';
+import {API, graphqlOperation} from 'aws-amplify';
 import React, {useEffect, useState} from 'react';
 import {View, Dimensions, StyleSheet} from 'react-native';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
@@ -92,7 +92,7 @@ const DrinkCarousel = () => {
         authMode: 'AMAZON_COGNITO_USER_POOLS',
       });
       const drinkItems = drinkData.data.listDrinks.items;
-      setDrinks(drinkItems);
+      if (drinkItems) setDrinks(drinkItems);
     } catch (err) {
       console.log('error fetching drinks', err);
     }
