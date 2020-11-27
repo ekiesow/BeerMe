@@ -2,6 +2,8 @@ import React from 'react';
 import {Button, Card, Paragraph} from 'react-native-paper';
 import {StyleSheet} from 'react-native';
 import awsExports from '../../aws-exports';
+import DeleteDrink from './DeleteDrink';
+import UpdateDrink from './UpdateDrink';
 
 const MyCard = (props) => {
   const drink = props.data;
@@ -46,7 +48,14 @@ const MyCard = (props) => {
           <Paragraph>Price: ${drink.price}</Paragraph>
         </Card.Content>
         <Card.Actions style={styles.cardActions}>
-          <Button mode="outlined">Let's Do It</Button>
+          {props.admin ? (
+            <>
+              <UpdateDrink data={drink} />
+              <DeleteDrink data={drink} />
+            </>
+          ) : (
+            <Button mode="outlined">Let's Do It</Button>
+          )}
         </Card.Actions>
       </Card>
     </>
