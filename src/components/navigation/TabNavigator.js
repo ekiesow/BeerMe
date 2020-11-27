@@ -34,6 +34,7 @@ const BottomTabNavigator = () => {
       console.log('Error getting user: ', err);
     }
   }
+
   return (
     <Tab.Navigator initialRouteName="Home">
       <Tab.Screen
