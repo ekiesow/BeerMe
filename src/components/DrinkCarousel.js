@@ -1,4 +1,4 @@
-import {API, graphqlOperation} from 'aws-amplify';
+import {API} from 'aws-amplify';
 import React, {useEffect, useState} from 'react';
 import {View, Dimensions, StyleSheet} from 'react-native';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
@@ -29,15 +29,56 @@ const initialState = [
   },
 ];
 
-const DrinkCarousel = () => {
+const DrinkCarousel = (props) => {
   const [activeSlide, setActiveSlide] = useState(0);
   const [drinks, setDrinks] = useState(initialState);
   // setDrinks({drinks.filter(drink => drink.drinkStyle === 'IPA'), ...drinks}); // TODO filter drinks by style
 
   useEffect(() => {
     fetchDrinks();
-    setUpSubscription();
-    console.log('use Effect is called');
+
+    createDrinkListener = API.graphql({
+      query: onCreateDrink,
+      authMode: 'AMAZON_COGNITO_USER_POOLS',
+    }).subscribe({
+      next: (drinkData) => {
+        // const newDrink = drinkData.value.data.onCreateDrink; // newly created drink
+        // const updatedDrinks = [newDrink, ...drinks];
+        // setDrinks(updatedDrinks);
+        fetchDrinks();
+      },
+    });
+
+    updateDrinkListener = API.graphql({
+      query: onUpdateDrink,
+      authMode: 'AMAZON_COGNITO_USER_POOLS',
+    }).subscribe({
+      next: (drinkData) => {
+        // const updatedDrink = drinkData.value.data.onUpdateDrink; // newly updated drink
+        // const index = drinks.findIndex((drink) => drink.id === updatedDrink.id);
+        // const updatedDrinks = [
+        //   ...drinks.slice(0, index),
+        //   updatedDrink,
+        //   ...drinks.slice(index + 1),
+        // ];
+        // setDrinks(updatedDrinks);
+        fetchDrinks();
+      },
+    });
+
+    deleteDrinkListener = API.graphql({
+      query: onDeleteDrink,
+      authMode: 'AMAZON_COGNITO_USER_POOLS',
+    }).subscribe({
+      next: (drinkData) => {
+        // const deletedDrink = drinkData.value.data.onDeleteDrink; // newly deleted drink
+        // const updatedDrinks = drinks.filter(
+        //   (drink) => drink.id !== deletedDrink.id,
+        // );
+        // setDrinks(updatedDrinks);
+        fetchDrinks();
+      },
+    });
 
     return () => {
       createDrinkListener.unsubscribe();
@@ -45,45 +86,6 @@ const DrinkCarousel = () => {
       deleteDrinkListener.unsubscribe();
     };
   }, []);
-
-  function setUpSubscription() {
-    createDrinkListener = API.graphql(
-      graphqlOperation(onCreateDrink),
-    ).subscribe({
-      next: (drinkData) => {
-        const newDrink = drinkData.value.data.onCreateDrink; // newly created drink
-        const updatedDrinks = [newDrink, ...drinks];
-        setDrinks(updatedDrinks);
-      },
-    });
-
-    updateDrinkListener = API.graphql(
-      graphqlOperation(onUpdateDrink),
-    ).subscribe({
-      next: (drinkData) => {
-        const updatedDrink = drinkData.value.data.onUpdateDrink; // newly updated drink
-        const index = drinks.findIndex((drink) => drink.id === updatedDrink.id);
-        const updatedDrinks = [
-          ...drinks.slice(0, index),
-          updatedDrink,
-          ...drinks.slice(index + 1),
-        ];
-        setDrinks(updatedDrinks);
-      },
-    });
-
-    deleteDrinkListener = API.graphql(
-      graphqlOperation(onDeleteDrink),
-    ).subscribe({
-      next: (drinkData) => {
-        const deletedDrink = drinkData.value.data.onDeleteDrink; // newly deleted drink
-        const updatedDrinks = drinks.filter(
-          (drink) => drink.id !== deletedDrink.id,
-        );
-        setDrinks(updatedDrinks);
-      },
-    });
-  }
 
   async function fetchDrinks() {
     try {
@@ -101,7 +103,7 @@ const DrinkCarousel = () => {
   const renderItem = ({item, index}) => {
     return (
       <View style={styles.container}>
-        <MyCard key={index} data={item} />
+        <MyCard key={index} data={item} admin={props.admin} />
       </View>
     );
   };
