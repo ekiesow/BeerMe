@@ -1,7 +1,12 @@
 # BeerMe
 A copycat app of the [Tavor](https://www.tavour.com/2) app with the purpose of learning React Native, AWS Amplify, and many other services from Amazon Web Services.
 
-### Android/Linux Environment Set Up
+
+## Architecture
+<img src=https://raw.githubusercontent.com/ekiesow/BeerMe/master/Proposal_V2.jpg>
+
+
+## Android/Linux Environment Set Up
 
 Full directions found [here](https://reactnative.dev/docs/environment-setup).
 
