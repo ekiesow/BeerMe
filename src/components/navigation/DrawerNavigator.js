@@ -33,8 +33,11 @@ const DrawerNavigator = () => {
   return (
     <Drawer.Navigator>
       <Drawer.Screen name="Home" component={TabNavigator} />
-      {admin && <Drawer.Screen name="Admin" component={AdminStackNavigator} />}
-      <Drawer.Screen name="Settings" component={SettingsStackNavigator} />
+      {admin ? (
+        <Drawer.Screen name="Admin" component={AdminStackNavigator} />
+      ) : (
+        <Drawer.Screen name="Settings" component={SettingsStackNavigator} />
+      )}
     </Drawer.Navigator>
   );
 };
