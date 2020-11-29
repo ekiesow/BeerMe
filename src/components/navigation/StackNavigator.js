@@ -77,9 +77,30 @@ const SettingsStackNavigator = () => {
 };
 
 const AdminStackNavigator = () => {
+  async function signOut() {
+    try {
+      await Auth.signOut();
+    } catch (err) {
+      console.log('Error signing out: ', err);
+    }
+  }
+
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="Admin" component={Admin} />
+      <Stack.Screen
+        name="Admin"
+        component={Admin}
+        options={{
+          headerRight: () => (
+            <IconButton
+              icon="logout-variant"
+              color={Colors.amber800}
+              size={30}
+              onPress={signOut}
+            />
+          ),
+        }}
+      />
     </Stack.Navigator>
   );
 };
