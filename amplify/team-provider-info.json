@@ -1,41 +1,48 @@
 {
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-beerme-dev-132907-authRole",
-      "UnauthRoleArn": "arn:aws:iam::226708847740:role/amplify-beerme-dev-132907-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::226708847740:role/amplify-beerme-dev-132907-authRole",
-      "Region": "us-west-2",
-      "DeploymentBucketName": "amplify-beerme-dev-132907-deployment",
-      "UnauthRoleName": "amplify-beerme-dev-132907-unauthRole",
-      "StackName": "amplify-beerme-dev-132907",
-      "StackId": "arn:aws:cloudformation:us-west-2:226708847740:stack/amplify-beerme-dev-132907/711ff4c0-f924-11ea-bd2d-0239b11280c5",
-      "AmplifyAppId": "d1g5t9fsaml27m"
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-beerme-dev-132907-authRole",
+            "UnauthRoleArn": "arn:aws:iam::226708847740:role/amplify-beerme-dev-132907-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::226708847740:role/amplify-beerme-dev-132907-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "amplify-beerme-dev-132907-deployment",
+            "UnauthRoleName": "amplify-beerme-dev-132907-unauthRole",
+            "StackName": "amplify-beerme-dev-132907",
+            "StackId": "arn:aws:cloudformation:us-west-2:226708847740:stack/amplify-beerme-dev-132907/711ff4c0-f924-11ea-bd2d-0239b11280c5",
+            "AmplifyAppId": "d1g5t9fsaml27m"
+        },
+        "categories": {
+            "auth": {
+                "beermea09a67d7": {},
+                "userPoolGroups": {}
+            }
+        }
     },
-    "categories": {
-      "auth": {
-        "beermea09a67d7": {},
-        "userPoolGroups": {}
-      }
+    "demo": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-beerme-demo-173850-authRole",
+            "UnauthRoleArn": "arn:aws:iam::226708847740:role/amplify-beerme-demo-173850-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::226708847740:role/amplify-beerme-demo-173850-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "amplify-beerme-demo-173850-deployment",
+            "UnauthRoleName": "amplify-beerme-demo-173850-unauthRole",
+            "StackName": "amplify-beerme-demo-173850",
+            "StackId": "arn:aws:cloudformation:us-west-2:226708847740:stack/amplify-beerme-demo-173850/f9f72640-2ebe-11eb-a1a0-0a648226af98",
+            "AmplifyAppId": "d1sodtpb8bedju"
+        },
+        "categories": {
+            "auth": {
+                "beermea09a67d7": {},
+                "userPoolGroups": {},
+                "beermeb03c6b69": {}
+            },
+            "notifications": {
+                "Pinpoint": {
+                    "Name": "BeerMeJpjFk-demo",
+                    "Id": "7af24ed1fa104d338d38fdba0bd673f8",
+                    "Region": "us-west-2"
+                }
+            }
+        }
     }
-  },
-  "demo": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-beerme-demo-173850-authRole",
-      "UnauthRoleArn": "arn:aws:iam::226708847740:role/amplify-beerme-demo-173850-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::226708847740:role/amplify-beerme-demo-173850-authRole",
-      "Region": "us-west-2",
-      "DeploymentBucketName": "amplify-beerme-demo-173850-deployment",
-      "UnauthRoleName": "amplify-beerme-demo-173850-unauthRole",
-      "StackName": "amplify-beerme-demo-173850",
-      "StackId": "arn:aws:cloudformation:us-west-2:226708847740:stack/amplify-beerme-demo-173850/f9f72640-2ebe-11eb-a1a0-0a648226af98",
-      "AmplifyAppId": "d1sodtpb8bedju"
-    },
-    "categories": {
-      "auth": {
-        "beermea09a67d7": {},
-        "userPoolGroups": {},
-        "beermeb03c6b69": {}
-      }
-    }
-  }
 }

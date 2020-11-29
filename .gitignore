@@ -76,3 +76,6 @@ amplifytools.xcconfig
 
 # VS Code
 .vscode/
+
+# Firebase
+android/app/google-services.json
