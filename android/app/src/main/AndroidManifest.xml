@@ -51,23 +51,4 @@
       <!-- [END Push notification config -->
     </application>
 
-    <!-- 
-      Add receiver which handles a notification to open the app
-      https://docs.amplify.aws/sdk/push-notifications/setup-push-service/q/platform/android 
-    -->
-    <receiver
-        android:name=”com.amazonaws.mobileconnectors.pinpoint.targeting.notification.PinpointNotificationReceiver” android:exported=”false” >
-        <intent-filter>
-            <action android:name=”com.amazonaws.intent.fcm.NOTIFICATION_OPEN” />
-        </intent-filter>
-    </receiver>
-    <!-- To receive notifications in the foreground, receive data payload, and more. -->
-    <service
-        android:name=".java.MyFirebaseMessagingService"
-        android:exported="false">
-        <intent-filter>
-            <action android:name="com.google.firebase.MESSAGING_EVENT" />
-        </intent-filter>
-    </service>
-
 </manifest>

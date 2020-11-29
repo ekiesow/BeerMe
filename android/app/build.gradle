@@ -135,6 +135,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        // multiDexEnabled true
     }
     splits {
         abi {
@@ -160,8 +161,13 @@ android {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
             signingConfig signingConfigs.debug
-            minifyEnabled enableProguardInReleaseBuilds
-            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            // Enables resource shrinking, which is performed by the
+            // Android Gradle plugin.
+            shrinkResources true
+            // Enables code shrinking, obfuscation, and optimization for only
+            // your project's release build type.
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
     }
 
@@ -182,6 +188,7 @@ android {
 }
 
 dependencies {
+    // implementation 'com.android.support:multidex:1.0.3'
     // Import the Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:26.1.0')
     // Declare dependencies for Firebase Cloud Messaging
