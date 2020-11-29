@@ -5,7 +5,7 @@ const UpdateDrink = (props) => {
   return (
     <IconButton
       icon="pencil"
-      color="#3F51B5"
+      color="#6200EE"
       onPress={() =>
         props.nav.navigate('Update Drink', {
           data: props.data,

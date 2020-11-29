@@ -36,7 +36,9 @@ const BottomTabNavigator = () => {
   }
 
   return (
-    <Tab.Navigator initialRouteName="Home">
+    <Tab.Navigator
+      initialRouteName="Home"
+      barStyle={{backgroundColor: '#6200EE'}}>
       <Tab.Screen
         name="Home"
         component={HomeStackNavigator}

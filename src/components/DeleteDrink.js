@@ -49,6 +49,6 @@ const DeleteDrink = (props) => {
     );
   };
 
-  return <IconButton icon="delete" color="#3F51B5" onPress={confirmDelete} />;
+  return <IconButton icon="delete" color="#6200EE" onPress={confirmDelete} />;
 };
 export default DeleteDrink;
