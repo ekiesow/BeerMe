@@ -20,7 +20,7 @@ const DrawerNavigator = () => {
       const user = await Auth.currentAuthenticatedUser();
       const groups =
         user.signInUserSession.accessToken.payload['cognito:groups'];
-      console.log('groups: ', groups);
+      // console.log('groups: ', groups);
       // using lodash to short circuit to make sure groups is not undefined
       if (!_.isEmpty(groups) && groups.includes('Admin')) {
         setAdmin(true);
