@@ -4,9 +4,18 @@ import {NavigationContainer} from '@react-navigation/native';
 import {withAuthenticator} from 'aws-amplify-react-native';
 import PushNotification from '@aws-amplify/pushnotification';
 import {Auth, Analytics} from 'aws-amplify';
+import {NativeModules} from 'react-native';
 // import { PushNotificationIOS } from '@react-native-community/push-notification-ios';
 
 import DrawerNavigator from './src/components/navigation/DrawerNavigator';
+
+// PushNotification.initializeAndroid();
+
+// get the registration token
+// This will only be triggered when the token is generated or updated.
+PushNotification.onRegister((token) => {
+  console.log('in app registration', token);
+});
 
 // get the notification data when notification is received
 PushNotification.onNotification((notification) => {
@@ -15,12 +24,6 @@ PushNotification.onNotification((notification) => {
 
   // required on iOS only (see fetchCompletionHandler docs: https://github.com/react-native-community/push-notification-ios#finish)
   // notification.finish(PushNotificationIOS.FetchResult.NoData);
-});
-
-// get the registration token
-// This will only be triggered when the token is generated or updated.
-PushNotification.onRegister((token) => {
-  console.log('in app registration', token);
 });
 
 // get the notification data when notification is opened
@@ -41,11 +44,27 @@ async function associateEndpointWithUser(setUserId) {
     userId: sub,
   })
     .then((data) => {
-      console.log('End Update Endpoint userId', data);
+      console.log('End Update Endpoint userId', JSON.stringify(data));
     })
     .catch((error) => {
       console.log('Update Endpoint userId', error);
     });
+}
+
+function associateFCMTokenWithEndpoint() {
+  NativeModules.RNPushNotification.getToken((token) => {
+    console.log('token: ', token);
+    // associate the device endpoint with the FCM token
+    Analytics.updateEndpoint({
+      address: token,
+    })
+      .then((data) => {
+        console.log('End Update Endpoint FCM token', JSON.stringify(data));
+      })
+      .catch((error) => {
+        console.log('Update Endpoint FCM token', error);
+      });
+  });
 }
 
 const App = () => {
@@ -62,6 +81,7 @@ const App = () => {
   const [userId, setUserId] = useState('');
   useEffect(() => {
     associateEndpointWithUser(setUserId);
+    associateFCMTokenWithEndpoint();
   }, []);
 
   return (

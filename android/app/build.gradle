@@ -188,12 +188,11 @@ android {
 }
 
 dependencies {
-    // implementation 'com.android.support:multidex:1.0.3'
     // Import the Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:26.1.0')
     // Declare dependencies for Firebase Cloud Messaging
     implementation "com.google.firebase:firebase-analytics" // includes firebase-core
-    implementation 'com.google.firebase:firebase-messaging'
+    implementation "com.google.firebase:firebase-messaging"
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
