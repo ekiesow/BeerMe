@@ -1,0 +1,22 @@
+{
+    "appName": "BeerMeJpjFk",
+    "roleName": "pinpointLambdaRole339ca367",
+    "cloudformationPolicyName": "cloudformationPolicy339ca367",
+    "cloudWatchPolicyName": "cloudWatchPolicy339ca367",
+    "pinpointPolicyName": "pinpointPolicy339ca367",
+    "authPolicyName": "pinpoint_amplify_339ca367",
+    "unauthPolicyName": "pinpoint_amplify_339ca367",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    },
+    "appId": "7af24ed1fa104d338d38fdba0bd673f8"
+}
