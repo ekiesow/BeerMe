@@ -9,8 +9,6 @@ import {NativeModules} from 'react-native';
 
 import DrawerNavigator from './src/components/navigation/DrawerNavigator';
 
-// PushNotification.initializeAndroid();
-
 // get the registration token
 // This will only be triggered when the token is generated or updated.
 PushNotification.onRegister((token) => {
@@ -57,6 +55,7 @@ function associateFCMTokenWithEndpoint() {
     // associate the device endpoint with the FCM token
     Analytics.updateEndpoint({
       address: token,
+      channelType: 'GCM',
     })
       .then((data) => {
         console.log('End Update Endpoint FCM token', JSON.stringify(data));
@@ -68,6 +67,13 @@ function associateFCMTokenWithEndpoint() {
 }
 
 const App = () => {
+  const [userId, setUserId] = useState('');
+  // associate the device endpoint with the user
+  useEffect(() => {
+    associateFCMTokenWithEndpoint();
+    associateEndpointWithUser(setUserId);
+  }, []);
+
   // retrieve and print the endpoint id, for testing only
   const [endpointId, setEndpointId] = useState('');
   useEffect(() => {
@@ -75,13 +81,6 @@ const App = () => {
       .endpointId;
     console.log('endpointId', myEndpointId);
     setEndpointId(myEndpointId);
-  }, []);
-
-  // associate the device endpoint with the user
-  const [userId, setUserId] = useState('');
-  useEffect(() => {
-    associateEndpointWithUser(setUserId);
-    associateFCMTokenWithEndpoint();
   }, []);
 
   return (
