@@ -42,7 +42,7 @@ Inside the root of the BeerMe project folder, start the Metro server in terminal
 ```
 npx react-native-start
 ```
-Then open a new terminal inside the room of the BeerMe project folder and run
+Then open a new terminal inside the root of the BeerMe project folder and run
 ```
 npx react-native run-android
 ```
