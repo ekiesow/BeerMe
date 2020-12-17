@@ -1,9 +1,10 @@
 import React from 'react';
-import {Button, Card, Paragraph} from 'react-native-paper';
+import {Card, Paragraph} from 'react-native-paper';
 import {StyleSheet} from 'react-native';
 import awsExports from '../../aws-exports';
 import DeleteDrink from './DeleteDrink';
 import UpdateDrink from './UpdateDrink';
+import PurchaseDrink from './PurchaseDrink';
 
 const MyCard = (props) => {
   const drink = props.data;
@@ -54,7 +55,7 @@ const MyCard = (props) => {
               <DeleteDrink data={drink} />
             </>
           ) : (
-            <Button mode="outlined">Let's Do It</Button>
+            <PurchaseDrink data={drink} nav={props.nav} />
           )}
         </Card.Actions>
       </Card>

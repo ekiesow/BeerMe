@@ -9,6 +9,7 @@ import Settings from '../../screens/SettingsScreen';
 import Profile from '../../screens/ProfileScreen';
 import Admin from '../../screens/AdminScreen';
 import Update from '../../screens/UpdateScreen';
+import Purchase from '../../screens/PurchaseScreen';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,7 @@ const HomeStackNavigator = () => {
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Update Drink" component={Update} />
+      <Stack.Screen name="Purchase Drink" component={Purchase} />
     </Stack.Navigator>
   );
 };
@@ -33,7 +35,6 @@ const OrdersStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="Orders" component={Orders} />
-      {/* <OrdersStack.Screen name="Settings" component={SettingsScreen} /> */}
     </Stack.Navigator>
   );
 };
