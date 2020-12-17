@@ -1,11 +1,18 @@
 # BeerMe
 A copycat app of the [Tavor](https://www.tavour.com/2) app with the purpose of learning React Native, AWS Amplify, and many other services from Amazon Web Services.
 
+<div style="display: flex">
 Home Screen
-![Home Screen](https://raw.githubusercontent.com/ekiesow/BeerMe/master/Home.jpg)
+<div style="flex: 50%; padding: 5px;">
+<img alt="Home Screen Image" src="https://raw.githubusercontent.com/ekiesow/BeerMe/master/Home.jpg" width="200" height="400">
+</div>
 
 Admin Screen
-![Admin Screen](https://raw.githubusercontent.com/ekiesow/BeerMe/master/Admin.jpg)
+<div style="flex: 50%; padding: 5px;">
+<img alt="Admin Screen Image" src="https://raw.githubusercontent.com/ekiesow/BeerMe/master/Admin.jpg" width="200" height="400">
+</div>
+</div>
+
 
 ## Architecture
 <img src=https://raw.githubusercontent.com/ekiesow/BeerMe/master/Proposal_V2.jpg>
